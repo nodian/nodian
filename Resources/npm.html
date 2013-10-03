@@ -1,24 +1,36 @@
 <html>
 <head>
 	<script type="text/javascript" src="js/jquery-1.10.2.js"></script>
+	<link href="core/bootstrap/css/bootstrap.css" rel="stylesheet">
+	<link href="core/css/flat-ui.css" rel="stylesheet">
+
 	<script type="text/javascript" src="js/gui.js"></script>
-	<title style="text-align:center;">project-name</title>
+	<title style="text-align:center;">my-project</title>
+	 <style>
+    body {float:left; margin:0px;padding:0px; min-width:100%; }
+    div.Left {float:left;width:25%;height:100%;background:#f2f2f2;}
+    div.Right {float:left;width:75%;height:100%;background:#000;}
+    div.Left_Middle{float:left;width:100%;height:90%;background: #a1a;}
+    </style>
+
 </head>
-	<body style="background-color:#1c1c1c;margin:0">
-		<div id="menu" style="background-color:#FFD700;height:200px;width:100px;float:left;">
-<b>Project</b><br>
-Icon<br>
-main.js<br>
-package.json<br>
-<b>tests</b><br>
-NPM<br>
-Node.JS Documentation</div>
-	<div id="packages" style="background-color:#EEEEEE;height:200px;width:400px;float:left;">npm packages goes here </div>
-<div id="bottom" style="background-color:#FFA500;clear:both;text-align:center;">
-alt kisim</div>
-
-
+<body>
+	<div class="Left">
+	<div role="search">
+  <form class="form-search js-search-form" action="/search" id="global-nav-search">
+    <input class="search-input" type="text" id="search-query" placeholder="Ara" name="q" autocomplete="on" spellcheck="false" aria-autocomplete="list" aria-haspopup="true" aria-controls="typeahead-dropdown-1">
+  </form>
 </div>
+<div class="Left_Middle">
+[Icon] + Project<br>
+NPM
+</div>
+
+<footer>
+  <p>dosya ekle cikar klasor ekle icons ve Ayarlar</p>
+</footer>
+</div>
+    <div class="Right">2</div>
 
 </body>
 
