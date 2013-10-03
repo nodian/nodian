@@ -7,13 +7,14 @@
 
 	<!-- Loading Our UI -->
 	<link href="core/css/flat-ui.css" rel="stylesheet">
+
 	<!-- END FOR UI -->
 
 
 	<style type="text/css" media="screen">
 		#editor { 
 			position: absolute;
-			top: 0;
+			top: 52px;
 			right: 0;
 			bottom: 0;
 			left: 0;
@@ -24,46 +25,45 @@
 </head>
 <body style="background-color: #ecf0f1;">
 
-		<div class="col-md-9">
-			<div class="navbar navbar-inverse">
-				<div class="navbar-header">
-					<button type="button" class="btn btn-navbar" data-toggle="collapse" data-target="#nav-collapse-01"></button>
-				</div>            
-				<div class="navbar-collapse collapse" id="nav-collapse-01">
-					<ul class="nav">
+	<div class="navbar navbar-inverse">
+		<div class="navbar-header">
+			<button type="button" class="btn btn-navbar" data-toggle="collapse" data-target="#nav-collapse-01"></button>
+		</div>            
+		<div class="navbar-collapse collapse" id="nav-collapse-01">
+			<ul class="nav">
+				<li>
+					<a href="#fakelink">
+						Menu Item
+						<span class="navbar-unread">1</span>
+					</a>
+				</li>
+				<li class="active">
+					<a href="#fakelink">
+						Messages
+						<span class="navbar-unread">1</span>
+					</a>
+					<ul>
+						<li><a href="#fakelink">Element One</a></li>
 						<li>
-							<a href="#fakelink">
-								Menu Item
-								<span class="navbar-unread">1</span>
-							</a>
-						</li>
-						<li class="active">
-							<a href="#fakelink">
-								Messages
-								<span class="navbar-unread">1</span>
-							</a>
+							<a href="#fakelink">Sub menu</a>
 							<ul>
 								<li><a href="#fakelink">Element One</a></li>
-								<li>
-									<a href="#fakelink">Sub menu</a>
-									<ul>
-										<li><a href="#fakelink">Element One</a></li>
-										<li><a href="#fakelink">Element Two</a></li>
-										<li><a href="#fakelink">Element Three</a></li>
-									</ul> <!-- /Sub menu -->
-								</li>
+								<li><a href="#fakelink">Element Two</a></li>
 								<li><a href="#fakelink">Element Three</a></li>
 							</ul> <!-- /Sub menu -->
 						</li>
-						<li>
-							<a href="#fakelink">
-								About Us
-							</a>
-						</li>
-					</ul>
-				</div><!--/.nav -->
-			</div>
-		</div>
+						<li><a href="#fakelink">Element Three</a></li>
+					</ul> <!-- /Sub menu -->
+				</li>
+				<li>
+					<a href="#fakelink">
+						About Us
+					</a>
+				</li>
+			</ul>
+		</div><!--/.nav -->
+	</div>
+
 	<div id="editor">
 		function foo(items) {
 		var x = "All this is syntax highlighted";
@@ -71,27 +71,28 @@
 	}
 	</div>
 </body>
-	<script type="text/javascript" src="base/jquery-1.10.2.js"></script>
-	<script type="text/javascript" src="base/ace/ace-builds/src-noconflict/ace.js" charset="utf-8"></script>
-
-	<!-- FOR UI -->
-	    <script src="core/js/jquery-ui-1.10.3.custom.min.js"></script>
-	    <script src="core/js/jquery.ui.touch-punch.min.js"></script>
-	    <script src="core/js/bootstrap.min.js"></script>
-	    <script src="core/js/bootstrap-select.js"></script>
-	    <script src="core/js/bootstrap-switch.js"></script>
-	    <script src="core/js/flatui-checkbox.js"></script>
-	    <script src="core/js/flatui-radio.js"></script>
-	    <script src="core/js/jquery.tagsinput.js"></script>
-	    <script src="core/js/jquery.placeholder.js"></script>
-	<!-- END FOR UI -->
 
 
-	<script type="text/javascript" src="base/gui.js"></script>
-	<script type="text/javascript">
-		var editor = ace.edit("editor");
-		editor.setTheme("ace/theme/solarized_dark");
-		editor.getSession().setMode("ace/mode/javascript");
-	</script>
+<script type="text/javascript" src="base/jquery-1.10.2.js"></script>
+<script type="text/javascript" src="base/ace/ace-builds/src-noconflict/ace.js" charset="utf-8"></script>
+
+<!-- FOR UI -->
+<script src="core/js/jquery-ui-1.10.3.custom.min.js"></script>
+<script src="core/js/jquery.ui.touch-punch.min.js"></script>
+<script src="core/js/bootstrap.min.js"></script>
+<script src="core/js/bootstrap-select.js"></script>
+<script src="core/js/bootstrap-switch.js"></script>
+<script src="core/js/flatui-checkbox.js"></script>
+<script src="core/js/flatui-radio.js"></script>
+<script src="core/js/jquery.tagsinput.js"></script>
+<script src="core/js/jquery.placeholder.js"></script>
+<!-- END FOR UI -->
+
+<script type="text/javascript" src="base/gui.js"></script>
+<script type="text/javascript">
+	var editor = ace.edit("editor");
+	editor.setTheme("ace/theme/solarized_dark");
+	editor.getSession().setMode("ace/mode/javascript");
+</script>
 
 </html>
