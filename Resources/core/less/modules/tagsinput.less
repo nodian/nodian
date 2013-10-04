@@ -4,7 +4,7 @@
 
 .tagsinput {
   background: white;
-  border: 2px solid @firm;
+  border: 2px solid mix(@inverse, @base, 90%);
   border-radius: 6px;
   height: 100px;
   margin-bottom: 18px;
@@ -14,8 +14,8 @@
 
   .tag {
     border-radius: 4px;
-    background-color: @firm;
-    color: @inverse;
+    background-color: mix(@inverse, @base, 90%);
+    color: mix(@base, @inverse, 65%);
     cursor: pointer;
     margin-right: 5px;
     margin-bottom: 5px;
@@ -25,7 +25,7 @@
     position: relative;
     vertical-align: middle;
     .inline-block();
-    .transition(.14s linear);
+    .transition(0.14s linear);
 
     &:hover {
       background-color: mix(@firm, black, 85%);
@@ -46,8 +46,8 @@
     background: transparent;
     border: none;
     color: @base;
-    font-family: @font-family-base;
-    font-size: @font-size-base;
+    font-family: @base-font-family;
+    font-size: @base-font-size;
     margin: 0px;
     padding: 0 0 0 5px;
     outline: 0;
@@ -113,5 +113,16 @@
 .not_valid {
   background: #fbd8db !important;
   color: #90111a !important;
-  margin-left: 5px !important;
 }
+
+// Alternate Color
+// --------------------------------------------------
+.tagsinput-primary {
+  border-color: @firm;
+
+  .tag {
+    background-color: @firm;
+    color: @inverse;
+  }
+}
+

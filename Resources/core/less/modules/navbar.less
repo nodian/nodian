@@ -3,46 +3,30 @@
 // --------------------------------------------------
 
 .navbar {
-  font-size: ceil(@font-size-base * 1.142); // ~16px
-  border-radius: @border-radius-large;
-  background: mix(@base, white, 9.5%);
-  border: none;
+  font-size: @base-font-size * 1.142; /* 16px */
 
-	.navbar-collapse {
-		padding-left: 0;
-		padding-right: 0;
-	}
-
-  .navbar-brand {
-    border-radius: @border-radius-large 0 0 @border-radius-large;
+  .brand {
+    border-radius: 6px 0 0 6px;
     color: mix(@base, white, 85%);
-    font-size: ceil(@font-size-base * 1.714); // ~24px
-    line-height: 29.55px;
+    font-size: @base-font-size * 1.714; /* 24px */
     font-weight: 700;
-    margin-left: -15px;
-    padding: 23px 28px 24px 17px;
+    margin-left: 0;
+    padding: 23px 28px 24px 32px;
     text-shadow: none;
-    display: inline-block;
-    
-    &:hover,
-    &:focus {
+    &:hover, &:focus {
       color: @firm;
     }
     &[class*="fui-"] {
       font-weight: normal;
     }
-    small { line-height: 1; }
   }
 
   .nav {
     margin-right: 0;
-    display: inline-block;
-    float: left;
 
     // First level nav
     > li {
       position: relative;
-      display: inline-block;
 
       &:hover {
         > ul {
@@ -64,18 +48,11 @@
           .box-shadow(none);
         }
       }
-      &:first-child {
-        border-radius: @border-radius-large @border-radius-large 0 0;
-      }
-      &:last-child {
-        border-radius: 0 0 @border-radius-large @border-radius-large;
-      }
 
       // Second level nav
       > ul {
         padding-top: 13px;
         top: 80%;
-        padding-left: 0;
         .dropdown-arrow(@base);
 
         // Third level nav
@@ -97,18 +74,14 @@
       // First level link
       > a {
         color: mix(@base, white, 85%);
-        display: inline-block;
         font-weight: 700;
-        font-size: ceil(@font-size-base * 1.071); // ~15px
-        line-height: 28px;
-        padding: 22px @navbar-link-space;
+        font-size: @base-font-size * 1.071; /* 15px */
+        padding: 29px @navbar-link-space 27px;
         text-shadow: none;
         .transition(~"background-color .25s, color .25s, border-bottom-color .25s");
 
-        &:hover,
-        &:focus {
+        &:hover, &:focus {
           color: @firm;
-          background-color: transparent;
         }
         &[class*="fui-"] {
           font-size: 24px;
@@ -127,12 +100,6 @@
         }
       }
     }
-    
-    > li:first-child {        
-      > a {
-        border-radius: 0 0 0 @border-radius-large;
-      }
-    }
 
     // Sub menu
     ul {
@@ -144,12 +111,13 @@
       position: absolute;
       top: 0;
       width: 234px;
+      z-index: -100;
       // Trigger transform to hide nav completely without 'ghost' bug (when switching from :hover to initial)
       -webkit-transform: scale(1, 0.99);
       -webkit-transform-origin: 0 0;
       // Don't show it at all by default since IE doesn't get modern transitions
       visibility: hidden;
-      .transition(.3s ease-out);
+      .transition(0.3s ease-out);
 
       // Deep level sub menu
       ul {
@@ -164,11 +132,11 @@
         position: relative;
 
         &:first-child {
-          border-radius: @border-radius-large @border-radius-large 0 0;
+          border-radius: 6px 6px 0 0;
           padding-top: 3px;
         }
         &:last-child {
-          border-radius: 0 0 @border-radius-large @border-radius-large;
+          border-radius: 0 0 6px 6px;
         }
         &.active {
           > a,
@@ -193,7 +161,7 @@
         border-radius: 2px;
         color: @inverse;
         display: block;
-        font-size: @font-size-base;
+        font-size: @base-font-size;
         padding: 6px @navbar-sublink-space;
         text-decoration: none;
 
@@ -209,19 +177,18 @@
     background: none;
     border: none;
     color: @base;
-    margin: 18px 15px 14px;
+    margin: 21px 15px 17px;
     text-shadow: none;
-    display: none;
+    .box-shadow(none);
 
-    &:hover,
-    &:focus {
+    &:hover, &:focus {
       background: none;
       color: @firm;
     }
     &:before {
       content: "\e00c";
       font-family: "Flat-UI-Icons";
-      font-size: ceil(@font-size-base * 1.571);
+      font-size: @base-font-size * 1.571;
       font-style: normal;
       font-weight: normal;
       -webkit-font-smoothing: antialiased;
@@ -237,16 +204,21 @@
   border: none;
   padding-left: 0;
   padding-right: 0;
-  border-radius: @border-radius-large;
+  .border-radius(6px);
+  .drop-ie-gradient();
+  .box-shadow(none);
 }
 
 // Alternate Color
 // --------------------------------------------------
 .navbar-inverse {
-  font-size: ceil(@font-size-base * 1.214); // ~17px
-  background-color: @base;
-  
-  .navbar-brand {
+  font-size: @base-font-size * 1.214; /* 17px */
+
+  .navbar-inner {
+    background: @base;
+    .drop-ie-gradient();
+  }
+  .brand {
     border-bottom: 2px solid mix(@base, black, 85%);
     border-right: 2px solid mix(@base, black, 85%);
     color: @inverse;
@@ -255,9 +227,6 @@
   .btn-navbar {
     color: @inverse;
     margin: 7px 10px;
-  }
-  .btn-icon {
-    margin: 8px 5px 8px 15px;
   }
   .nav {
     > li {
@@ -275,43 +244,38 @@
       // Active item
       &.active {
         > a {
-          &,
-          &:hover,
-          &:focus {
+          &, &:hover, &:focus {
             background-color: @firm;
             border-bottom-color: mix(@firm, black, 85%);
             border-left: none;
             color: @inverse;
-            padding-left: @navbar-link-space;
+            padding-left: @navbar-link-space + 2;
+            .box-shadow(none);
           }
         }
         & + li {
           > a {
             border-left: none;
-            padding-left: @navbar-link-space;
+            padding-left: @navbar-link-space + 2;
           }
         }
       }
 
       // Link styling
       > a {
-        font-size: floor(@font-size-base * 1.143); // ~16px
+        font-size: @base-font-size * 1.143; /* 16px */
         border-bottom: 2px solid mix(@base, black, 85%);
         border-left: 2px solid mix(@base, black, 85%);
-        color: @inverse;
+        color: @inverse;        
         padding: 16px @navbar-link-space 15px;
-        line-height: 20px;
       }
     }
-  }
-  .nav.pull-right {
-	  margin-right: -15px;
   }
 
   // Round corders of the pull-right dropdown
   .nav.pull-right > li {
     > a {
-      border-radius: 0 @border-radius-large @border-radius-large 0;
+      border-radius: 0 6px 6px 0;
     }
   }
 }
@@ -319,14 +283,14 @@
 // Unread icon
 .navbar-unread,
 .navbar-new {
-  font-family: @font-family-base;
+  font-family: @base-font-family;
   background-color: @firm;
   border-radius: 50%;
   color: @inverse;
   font-size: 0;
   font-weight: 700;
   height: 6px;
-  line-height: @font-size-base;
+  line-height: @base-font-size;
   position: absolute;
   right: 12px;
   text-align: center;
@@ -349,7 +313,7 @@
   line-height: 17px;
   height: 18px;
   margin: -9px -1px;
-  min-width: 18px;
+  min-width: 16px;
   padding: 0 1px;
   width: auto;
   -webkit-font-smoothing: subpixel-antialiased;
@@ -399,8 +363,7 @@
     > .dropdown-toggle {
       outline: none;
 
-      &:hover,
-      &:focus {
+      &:hover, &:focus {
         .caret {
           border-bottom-color: @firm;
           border-top-color: @firm;
@@ -413,6 +376,7 @@
         border-bottom-color: lighten(@base, 13%);
         border-top-color: lighten(@base, 13%);
         margin-left: 10px;
+        margin-top: 7px;
       }
     }
     .dropdown-menu {
@@ -445,12 +409,104 @@
   }
 }
 
+// SEARCH BOX
+// -----------
+.navbar {
+  // Inverse navbar search box styling
+  &.navbar-inverse {
+    .navbar-search {
+      border-left: 2px solid mix(@base, black, 85%);
+      border-bottom: 2px solid mix(@base, black, 85%);
+      padding: 8px @navbar-link-space 6px;
+      min-width: 220px;
+
+      &.form-search {
+        .input-append {
+          .search-query {
+            &:focus {
+              & + .btn {
+                border-color: @firm;
+              }
+            }
+          }
+          .btn {
+            background-color: mix(@base, black, 85%);
+            color: lighten(@base, 13%);
+            &:hover, &:focus {
+              color: @inverse;
+            }
+          }
+        }
+      }
+      .search-query,
+      .search-query:focus {
+        background-color: mix(@base, black, 85%);
+        color: @inverse;
+        .placeholder-color(lighten(@base, 10%));
+      }
+      .search-query:focus {
+        border-color: @firm;
+      }
+    }
+  }
+
+  // Default navbar search box styling
+  .navbar-search {
+    margin: 0;
+    padding: 20px @navbar-link-space 19px;
+
+    &.form-search {
+      .input-append {
+        .search-query {
+          border-right: none;
+          &:focus {
+            .border-radius(6px 0 0 6px);
+            & + .btn {
+              border-color: @firm;
+            }
+          }
+        }
+        .btn {
+          background-color: @inverse;
+          border-color: transparent;
+          color: mix(@base, white, 33%);
+          padding: 8px 8px 7px;
+          &:hover, &:focus {
+            color: @firm;
+          }
+        }
+      }
+    }
+
+    .search-query,
+    .search-query:focus {
+      background-color: @inverse;
+      border: 2px solid transparent;
+      color: mix(@base, white, 85%);
+      font-family: @base-font-family;
+      font-size: @base-font-size * 1.071; /* 15px */
+      padding: 5px 5px 7px;
+      text-shadow: none;
+      .border-radius(6px);
+      .box-shadow(none);
+      .placeholder-color(mix(@base, white, 33%));
+      .placeholder-height(18px);
+      .transition(.25s);
+    }
+    .search-query:focus {
+      border-color: @firm;
+    }
+  }
+}
+
 // Fixed top/bottom
 .navbar.navbar-fixed-bottom,
 .navbar.navbar-fixed-top {
   .navbar-inner {
+    .box-shadow(none);
+
     .navbar-search {
-      .form-control {
+      .search-query {
         border-radius: 50px 0 0 50px !important;
       }
       .btn {
@@ -483,5 +539,170 @@
       bottom: 80%;
       top: auto;
     }
+  }
+}
+
+//
+// Responsive: Tablet
+// --------------------------------------------------
+@media (max-width: 979px) {
+  .navbar {
+    &.navbar-inverse {
+      .brand {
+        border: none;
+      }
+      .nav {
+        > li {
+          &.active {
+            > a,
+            > a:hover,
+            > a:focus {
+              background-color: @firm;
+            }
+          }
+          > a,
+          > a:hover {
+            background: none;
+            border: none;
+          }
+          ul li a {
+            color: @inverse;
+          }
+        }
+      }
+      .navbar-form,
+      .navbar-search {
+        border: none;
+        .box-shadow(none);
+      }
+      a,
+      .nav-collapse .nav > li > a,
+      .nav-collapse li.dropdown .dropdown-menu a {
+        color: @inverse;
+        .border-radius(0);
+
+        &:hover, &:focus {
+          color: @inverse;
+        }
+      }
+    }
+    .brand {
+      padding-left: 20px;
+    }
+    .nav {
+      > li,
+      > li.dropdown {
+        &:hover {
+          > ul,
+          .dropdown-menu {
+            height: auto;
+            margin-left: 30px;
+
+            li:hover {
+              a {
+                background-color: transparent;
+                color: @firm;
+              }
+              ul {
+                height: auto;
+                margin-left: 20px;
+              }
+            }
+          }
+        }
+        > a,
+        > a:hover {
+          background: none;
+          padding: 7px 20px;
+        }
+        ul {
+          background: none;
+          height: 0;
+          padding: 0;
+          position: static;
+          width: auto;
+
+          &:before, &:after {
+            display: none;
+          }
+          li {
+            background: none;
+
+            a {
+              color: @base;
+
+              &:hover, &:focus {
+                color: @firm;
+              }
+            }
+          }
+        }
+      }
+
+      li.dropdown {
+        .dropdown-menu {
+          background: none;
+          margin-top: 0;
+
+          li {
+            a {
+              color: @base;
+
+              &:hover, &:focus {
+                color: @firm;
+              }
+            }
+          }
+        }
+      }
+      .dropdown-toggle:focus {
+        background-color: transparent !important;
+      }
+
+      li a .hidden-desktop {
+        display: inline!important;
+      }
+    }
+
+    .nav-collapse {
+      .navbar-form,
+      .navbar-search {
+        border: none;
+        .box-shadow(none);
+
+        .input-append {
+          display: block;
+
+          .search-query,
+          .search-query:focus {
+            border-right: 2px solid transparent;
+            border-radius: 6px;
+            height: 37px;
+            margin-right: -41px;
+            width: 100%;
+            .box-sizing();
+          }
+          .btn {
+            position: relative;
+            z-index: 2;
+          }
+        }
+        &.focus {
+          .search-query,
+          .btn {
+            border-color: @firm !important;
+          }
+        }
+      }
+    }
+  }
+
+
+  // Unread icon
+  .navbar-unread,
+  .navbar-new {
+    position: static;
+    float: right;
+    margin: 0 0 0 10px;
   }
 }

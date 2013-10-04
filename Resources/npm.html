@@ -1,10 +1,12 @@
 <html style="-webkit-backface-visibility: hidden;" charset="utf-8">
 <head>
-
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <!-- FOR UI -->
   <!-- Loading Bootstrap -->
   <link href="core/bootstrap/css/bootstrap.css" rel="stylesheet">
-
+  <link href="core/bootstrap/css/bootstrap-responsive.css" rel="stylesheet">
+  
   <!-- Loading Our UI -->
   <link href="core/css/flat-ui.css" rel="stylesheet">
 
@@ -30,30 +32,32 @@
 
 
 <body>
-	<div class="leanleft">
-    <div class="todo">
-      <div class="todo-search">
-        <input class="todo-search-field" value="" placeholder="Search Packages" type="search">
+	<div class="leanleft" style="background-color: #000000;">
+
+    <div class="input-append">
+      <input class="span2 huge search-query search-query-rounded" placeholder="Search" id="search-query-5" type="text">
+      <button type="submit" class="btn btn-huge"><span class="fui-search"></span></button>
+    </div>
+
+
+    <label class="radio" style="left:20px;">
+      <input type="radio" name="group1" value="1" data-toggle="radio">
+      In Project
+    </label>
+    <label class="radio" style="left:20px;">
+      <input type="radio" name="group1" value="1" data-toggle="radio">
+      In NPM
+    </label>
+
+    <div class="row">
+
+      <div class="switch switch-square" style="left: 50px; margin-top: 25px;">
+        <input type="checkbox" checked data-toggle="switch" />
+      </div>
+      <div class="col-xs-6" style="float:right; right:20px;">
+        <p>Register packages to <code>packages.json</code> on install</p>
       </div>
 
-      <label class="radio" style="left:20px;">
-        <input type="radio" name="group1" value="1" data-toggle="radio">
-        In Project
-      </label>
-      <label class="radio" style="left:20px;">
-        <input type="radio" name="group1" value="1" data-toggle="radio">
-        In NPM
-      </label>
-
-      <div class="row">
-
-        <div class="switch switch-square" style="left: 50px; margin-top: 25px;">
-          <input type="checkbox" checked data-toggle="switch" />
-        </div>
-        <div class="col-xs-6" style="float:right; right:20px;">
-          <p>Register packages to <code>packages.json</code> on install</p>
-        </div>
-      </div>
     </div>
   </div>
 
@@ -61,7 +65,7 @@
 
   <div class="leanright">
 
-BURA ARAMA SONUÇLARI SÜTUNU VE YÜKLÜ OLANLAR İLE DOLDURULACAK
+    BURA ARAMA SONUÇLARI SÜTUNU VE YÜKLÜ OLANLAR İLE DOLDURULACAK
 
   </div>
 

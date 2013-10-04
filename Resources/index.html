@@ -1,83 +1,128 @@
-<html style="-webkit-backface-visibility: hidden;">
+<html style="-webkit-backface-visibility: hidden; height: 100%;">
 <head>
 
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<!-- FOR UI -->
 	<!-- Loading Bootstrap -->
 	<link href="core/bootstrap/css/bootstrap.css" rel="stylesheet">
+	<link href="core/bootstrap/css/bootstrap-responsive.css" rel="stylesheet">
 
 	<!-- Loading Our UI -->
 	<link href="core/css/flat-ui.css" rel="stylesheet">
 
+	<!-- Loading Our Custom Styles -->
+	<link href="core/css/our.css" rel="stylesheet">
 	<!-- END FOR UI -->
 
-
 	<style type="text/css" media="screen">
-		#editor { 
-			position: absolute;
-			top: 52px;
-			right: 0;
-			bottom: 0;
-			left: 0;
+		#editor {
+		    position: absolute;
+		    top: 0;
+		    right: 0;
+		    bottom: 0;
+		    left: 0;
 		}
+
+		#editor-container {
+		    position: relative;
+		    height: 100%;
+		}
+
+		#editor-mask {
+		    height: 1000px;
+		    overflow-y: hidden;
+		}
+
 	</style>
 
 
 </head>
-<body id="content" style="background-color: #ecf0f1;">
-	<div class="navbar navbar-inverse">
-		<div class="navbar-header">
-			<button type="button" class="btn btn-navbar" data-toggle="collapse" data-target="#nav-collapse-01"></button>
-		</div>            
-		<div class="navbar-collapse collapse" id="nav-collapse-01">
-			<ul class="nav">
-				<li class="active">
-					<a href="#fakelink">
-						Nodian
-						<span class="navbar-unread">2</span>
-					</a>
-				</li>
-				<li>
-					<a href="#fakelink">
-						Messages
-						<span class="navbar-unread">1</span>
-					</a>
-					<ul>
-						<li><a href="#fakelink">Element One</a></li>
+<body id="content" style="height: 100%; background-color: #ecf0f1;">
+
+	<div class="navbar navbar-inverse" style="margin-bottom: 0px;">
+		<div class="navbar-inner">
+			<div class="container">
+				<button type="button" class="btn btn-navbar" data-toggle="collapse" data-target="#nav-collapse-03">
+				</button>
+
+				<a href="index.html" class="brand"><img src="base/logosm.png">  Nodian</a>
+				<div class="nav-collapse collapse" id="nav-collapse-03">
+					<ul class="nav">
 						<li>
-							<a href="#fakelink">Sub menu</a>
+							<a href="#fakelink">
+								Menu Item
+								<span class="navbar-unread">1</span>
+							</a>
+						</li>
+						<li class="active">
+							<a href="#fakelink">
+								Messages
+								<span class="navbar-unread">1</span>
+							</a>
 							<ul>
 								<li><a href="#fakelink">Element One</a></li>
-								<li><a href="#fakelink">Element Two</a></li>
+								<li>
+									<a href="#fakelink">Sub menu</a>
+									<ul>
+										<li><a href="#fakelink">Element One</a></li>
+										<li><a href="#fakelink">Element Two</a></li>
+										<li><a href="#fakelink">Element Three</a></li>
+									</ul> <!-- /Sub menu -->
+								</li>
 								<li><a href="#fakelink">Element Three</a></li>
 							</ul> <!-- /Sub menu -->
 						</li>
-						<li><a href="#fakelink">Element Three</a></li>
-					</ul> <!-- /Sub menu -->
-				</li>
-				<li>
-					<a href="npm.html" >
-						NPM
-					</a>
-				</li>
-			</ul>
-		</div><!--/.nav -->
+						<li>
+							<a href="npm.html">
+								NPM
+							</a>
+						</li>
+					</ul> <!-- /nav -->
+
+					<ul class="nav pull-right">
+						<li class="divider"></li>
+						<li class="dropdown">
+							<a href="#" class="dropdown-toggle" data-toggle="dropdown">
+								Settings <b class="caret"></b>
+							</a>
+							<ul class="dropdown-menu">
+								<li><a href="#fakelink">Action</a></li>
+								<li><a href="#fakelink">Another action</a></li>
+								<li><a href="#fakelink">Something else here</a></li>
+								<li class="divider"></li>
+								<li><a href="#fakelink">Separated link</a></li>
+							</ul>
+						</li>
+					</ul> <!-- /nav -->
+				</div><!--/.nav-collapse -->
+			</div>
+		</div>
+	</div> <!-- /navbar-inverse -->
+
+	<div>
+		<div id="treeview" style="width: 30%; float:left;">
+
+		</div>
+
+
+		<div id="editor-container" style="width: 70%; float:right;">
+			<div id="editor" >
+			function foo(items) {
+				var x = "All this is syntax highlighted";
+				return x;
+			}
+			</div>
+		</div>
+
+		<div style="clear:both"></div>
 	</div>
 
-	<div class="switch switch-square">
-      <input type="checkbox" checked data-toggle="switch" />
-    </div>
-
-	<div id="editor">
-	function foo(items) {
-		var x = "All this is syntax highlighted";
-		return x;
-	}
-	</div>
 </body>
 
 
 <script type="text/javascript" src="base/jquery-1.10.2.js"></script>
-<script type="text/javascript" src="base/ace/ace-builds/src-noconflict/ace.js" charset="utf-8"></script>
+
 
 <!-- FOR UI -->
 <script src="core/js/jquery-ui-1.10.3.custom.min.js"></script>
@@ -89,13 +134,33 @@
 <script src="core/js/flatui-radio.js"></script>
 <script src="core/js/jquery.tagsinput.js"></script>
 <script src="core/js/jquery.placeholder.js"></script>
+<script src="core/js/jquery.stacktable.js"></script>
 <!-- END FOR UI -->
 
+<script type="text/javascript" src="base/jstree/jquery.jstree.js"></script>
+<script type="text/javascript" src="base/jqwidgets/jqx-all.js"></script>
 <script type="text/javascript" src="base/gui.js"></script>
+<script type="text/javascript" src="base/tree.js"></script>
+
+<script type="text/javascript" src="base/ace/ace-builds/src-noconflict/ace.js" charset="utf-8"></script>
+
 <script type="text/javascript">
 	var editor = ace.edit("editor");
 	editor.setTheme("ace/theme/solarized_dark");
 	editor.getSession().setMode("ace/mode/javascript");
+
+	editor.getSession().setUseWrapMode(true);
+	var lastLine = $("#editor .ace_gutter-cell:last");
+
+	function setEditorHeight(){
+		var lastLine = $("#editor .ace_gutter-cell:last");
+		var neededHeight = lastLine.position().top + lastLine.outerHeight();
+		$("#editor-mask").height(neededHeight);
+	}
+
+	$(window).on('resize', setEditorHeight);
+	setEditorHeight();
+
 </script>
 
 </html>

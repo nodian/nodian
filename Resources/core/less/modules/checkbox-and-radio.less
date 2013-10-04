@@ -25,19 +25,16 @@
     top: 0;
     width: 20px;
     text-align: center;
-    line-height: 21px;
+    line-height: 20px;
     font-size: 20px;
-    cursor: pointer;
     .transition(color .25s linear);
 
-    .first-icon,
+    .first-icon-icon,
     .second-icon {
-    	display: inline-table;
       position: absolute;
       left: 0;
       top: 0;
-      background-color: @inverse;
-      .opacity(1);
+      .opacity(100);
     }
     .second-icon {
       .opacity(0);
@@ -49,21 +46,26 @@
 
   // Hover State
   &:hover {
-    color: @lightgray;
-    .transition(color .25s linear);
+    .first-icon {
+      .opacity(0);
+    }
+    .second-icon {
+      .opacity(100);
+    }
   }
 
   // Checked State
   &.checked {
     color: @link-color;
 
+    .icons {
+      color: @firm;
+    }
     .first-icon {
       .opacity(0);
     }
     .second-icon {
-        color: @link-color;
-        .transition(color .25s linear);
-      .opacity(1);
+      .opacity(100);
     }
   }
 
@@ -76,7 +78,7 @@
       color: mix(@lightgray, white, 38%);
     }
     .first-icon {
-      .opacity(1);
+      .opacity(100);
     }
     .second-icon {
       .opacity(0);
@@ -89,8 +91,39 @@
         .opacity(0);
       }
       .second-icon {
-        color: mix(@lightgray, white, 38%);
-        .opacity(1);
+        .opacity(100);
+      }
+    }
+  }
+
+  // Alternate Color
+  // --------------------------------------------------
+
+  // Primary
+  &.primary {
+    .icons {
+      color: @base;
+    }
+    // Checked State
+    &.checked {
+      color: @link-color;
+
+      .icons {
+        color: @firm;
+      }
+    }
+    // Disabled state
+    &.disabled {
+      cursor: default;
+      color: @lightgray;
+
+      .icons {
+        color: @lightgray;
+      }
+      &.checked {
+        .icons {
+          color: @lightgray;
+        }
       }
     }
   }
