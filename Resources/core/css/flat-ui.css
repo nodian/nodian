@@ -1331,7 +1331,6 @@ a.muted:focus {
 }
 .navbar .nav > li > ul li:hover ul {
   opacity: 1;
-  -webkit-transform: scale(1, 1);
   visibility: visible;
   display: block\9;
 }
