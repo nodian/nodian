@@ -38,7 +38,7 @@
 
 
 </head>
-<body id="content" style="height: 100%; background-color: #ecf0f1;">
+<body id="content" style="height: 100%; background-color: #1abc9c;">
 
 	<div class="navbar navbar-inverse" style="margin-bottom: 0px;">
 		<div class="navbar-inner">
@@ -46,33 +46,9 @@
 				<button type="button" class="btn btn-navbar" data-toggle="collapse" data-target="#nav-collapse-03">
 				</button>
 
-				<a href="index.html" class="brand"><img src="base/logosm.png">  Nodian</a>
+				<a href="index.html" class="brand"><img src="base/logowrit.png"></a>
 				<div class="nav-collapse collapse" id="nav-collapse-03">
 					<ul class="nav">
-						<li>
-							<a href="#fakelink">
-								Menu Item
-								<span class="navbar-unread">1</span>
-							</a>
-						</li>
-						<li class="active">
-							<a href="#fakelink">
-								Messages
-								<span class="navbar-unread">1</span>
-							</a>
-							<ul>
-								<li><a href="#fakelink">Element One</a></li>
-								<li>
-									<a href="#fakelink">Sub menu</a>
-									<ul>
-										<li><a href="#fakelink">Element One</a></li>
-										<li><a href="#fakelink">Element Two</a></li>
-										<li><a href="#fakelink">Element Three</a></li>
-									</ul> <!-- /Sub menu -->
-								</li>
-								<li><a href="#fakelink">Element Three</a></li>
-							</ul> <!-- /Sub menu -->
-						</li>
 						<li>
 							<a href="npm.html">
 								NPM
@@ -99,7 +75,7 @@
 		</div>
 	</div> <!-- /navbar-inverse -->
 
-	<div>
+	<div id="core">
 		<div id="treeview" style="width: 30%; float:left;">
 
 		</div>
@@ -136,10 +112,15 @@
 <script src="core/js/jquery.stacktable.js"></script>
 <!-- END FOR UI -->
 
+<!-- Tree View -->
 <script type="text/javascript" src="base/jstree/jquery.jstree.js"></script>
 <script type="text/javascript" src="base/jqwidgets/jqx-all.js"></script>
+
+
+<!-- OUR SCRIPTS -->
 <script type="text/javascript" src="base/gui.js"></script>
 <script type="text/javascript" src="base/tree.js"></script>
+<!-- end OUR SCRIPTS -->
 
 <script type="text/javascript" src="base/ace/ace-builds/src-noconflict/ace.js" charset="utf-8"></script>
 
@@ -159,6 +140,8 @@
 
 	$(window).on('resize', setEditorHeight);
 	setEditorHeight();
+
+
 
 </script>
 

@@ -13,12 +13,6 @@ $( window ).resize(function() {
 	editorheight();
 });
 
-
-
- $().ready(function(){
-   $("#main").splitter();
- });
-
 function loadNPM(){
 	$( "#content" ).load( "./npm.html" );
 }
