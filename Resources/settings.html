@@ -13,27 +13,57 @@
   <!-- END FOR UI -->
 
   <style type="text/css">
-    .leanleft {
-      -webkit-backface-visibility: hidden;
-      float:left;
-      width:80%;
-      height:auto;
-      background:#FFFFFF;
+    
     }
-    .leanright {
-      -webkit-backface-visibility: hidden;
-      float:left;
-      width:80%;
-      height:auto;
-      background:#000;
-    }
+    
 .row {
      
       float:right;
       width:70%;
       height:auto;
-      background:#000;}
+      background:#000;
+      margin-left:auto; 
+      margin-right: auto;}
 
+      #upleft { -webkit-backface-visibility: hidden;
+   width:50%; 
+   height: 300px; 
+   background:#2C3E50; float:left; 
+}
+
+#upright { -webkit-backface-visibility: hidden;
+   width:50%; 
+   height:300px; 
+   background:#2C3E50; 
+   float:right;
+}
+#belowright { -webkit-backface-visibility: hidden;
+   width:50%; 
+   height:300px; 
+   background:#2C3E50; 
+   float:right;
+}
+#middleright { -webkit-backface-visibility: hidden;
+   width:50%; 
+   height:300px; 
+   background:#2C3E50; 
+   float:right;}
+
+
+
+
+   #middleleft
+   { -webkit-backface-visibility: hidden;
+   width:50%; 
+   height: 300px; 
+   background:#2C3E50; float:left; 
+}
+
+#belowleft { -webkit-backface-visibility: hidden;
+   width:50%; 
+   height: 300px; 
+   background:#2C3E50; float:left; 
+}
 
 
   </style>
@@ -44,13 +74,15 @@
 
 <script src="settings.js"></script>
 
-	<div class="leanleft" style="background-color: #000000;">
-
-    
 
 
+<div id="upleft"> <h4 style="margin-left:10px; color:#27AE60">Editor</h4></div>
+<div id="upright"></div>
+<div id="belowleft">
 
-    <div class="row" ><a> fwdfdsfnnn <a/>
+
+
+<div class="row" ><a style="margin-left:40px"> fwdfdsfnnn <a/>
         <div class="switch switch-square" style="left: 50px; margin-top: 25px;">
         <input type="checkbox" checked data-toggle="switch" />
     
@@ -61,7 +93,7 @@
 
 
 
-    <div class="row"><a> fwdfdsfnnn <a/>
+    <div class="row"><a style="margin-left:40px"> fwdfdsfnnn <a/>
 
       <div class="switch switch-square" style="left: 50px; margin-top: 25px;">
         <input type="checkbox" checked data-toggle="switch" />
@@ -76,7 +108,7 @@
 
 
 
-<div class="row"><a> fwdfdsfnnn <a/>
+<div class="row"><a style="margin-left:40px"> fwdfdsfnnn <a/>
       <div class="switch switch-square" style="left: 50px; margin-top: 25px;">
         <input type="checkbox" checked data-toggle="switch" />
       </div>
@@ -84,7 +116,7 @@
 
     </div>
 
-<div class="row" ><a> fwdfdsfnnn <a/>
+<div class="row" ><a style="margin-left:40px"> fwdfdsfnnn <a/>
         <div class="switch switch-square" style="left: 50px; margin-top: 25px;">
         <input type="checkbox" checked data-toggle="switch" />
     
@@ -92,7 +124,7 @@
       
 
     </div>
-<div class="row" ><a> fwdfdsfnnn <a/>
+<div class="row" ><a style="margin-left:40px"> fwdfdsfnnn <a/>
         <div class="switch switch-square" style="left: 50px; margin-top: 25px;">
         <input type="checkbox" checked data-toggle="switch" />
     
@@ -100,6 +132,22 @@
       
 
     </div>
+
+
+
+
+</div>
+<div id="middleleft"></div>
+<div id="middleright"></div>
+<div id="belowright"></div>
+
+
+
+
+
+
+
+
 
 
   </div>
