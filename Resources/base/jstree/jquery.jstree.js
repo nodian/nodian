@@ -3718,6 +3718,8 @@
 			select_node : false, // requires UI plugin
 			show_at_node : true,
 			items : { // Could be a function that should return an object like this one
+
+				/*
 				"create" : {
 					"separator_before"	: false,
 					"separator_after"	: true,
@@ -3766,6 +3768,8 @@
 						}
 					}
 				}
+
+				*/
 			}
 		},
 		_fn : {

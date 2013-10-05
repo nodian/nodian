@@ -184,6 +184,29 @@ function setTree (tree) {
 						}
 					},
 
+					"deleter": {
+						"label"		: "Delete",
+						"action"	: function (data) {
+							var fh = Ti.Filesystem.getFile(data.context.pathname, '');
+							if(fh.isFile()){
+								fh.deleteFile();
+								if(this.is_selected(data)) {
+									this.remove();
+								} else {
+									this.remove(data); 
+								}
+							}else{
+								fh.deleteDirectory(true);
+								if(this.is_selected(data)) {
+									this.remove();
+								} else {
+									this.remove(data); 
+								}
+							}
+						}
+					},
+
+
 					"rename" : {
 						// The item label
 						"label"				: "Rename",
@@ -277,7 +300,7 @@ function createFile (argument) {
 }
 
 function deleteFile (argument) {
-	// body...
+	
 }
 
 function saveFile (argument) {
