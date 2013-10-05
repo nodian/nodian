@@ -40,9 +40,29 @@ var filesystem = [];
 
 function first(p){for(var i in p)return p[i];}
 
+function fillFilesystemWithRoot (projectpath) {
+	var rootarray = projectpath.split(Ti.Filesystem.getSeparator())
+	var root = new Array();
+	root[1] = new Object();
+    root[1].attr = new Object();
+    root[1].data = new Object();
+    root[1].data.attr = new Object();
+    root[1].children = new Array();
+	
+    root[1].attr.id = 0;
+	root[1].data.title = rootarray[rootarray.length - 1];
+	root[1].data.attr.href = projectpath;
+
+	var fs = fillFilesystem(projectpath);
+
+	root[1].children = fs;
+	return root[1];
+}
+
 function fillFilesystem(projectpath){
 	// /Users/core/etc tipinde olacak
 	// watchdog yaparken modificationTimestamp( ) kullan
+
 	var fs = [];
 	var dir = Ti.Filesystem.getFile(projectpath);
 	var dir_total = dir.getDirectoryListing();
@@ -121,8 +141,6 @@ function nameit (title) {
 	submitRequest('namertoggle');
 }
 
-var manipulatornodeanddata = new Object();
-
 function setTree (tree) {
 	$(function () {
 		$("#treeview").jstree({ 
@@ -141,19 +159,22 @@ function setTree (tree) {
 					"newfile": {
 						"label"		: "New File",
 						"action"	: function (data) {
-							/*
-							manipulatornodeanddata = new Object();
 							var fh = Ti.Filesystem.getFile(data.context.pathname, '');
 							if(fh.isFile()){
-								return;
+								var fhparent = fh.parent();
+
 							}else{
-								manipulatornodeanddata = {
-									"node": this,
-									"data": data
-								}
-								nameit('File Name');
+								//nameit('File Name');
+								var fileneym = $('#namertext').text();
+								var passer = {
+									"title" : fileneym, 
+									"attr" : { "href" : this.data.context.pathname+Ti.Filesystem.getSeparator()+fileneym } 
+								};
+								this.create(data, undefined, fileneym, undefined, true);
+								//console.dir(this);
+								console.log(data.context.pathname+Ti.Filesystem.getSeparator()+fileneym);
+								createFile(data.context.pathname+Ti.Filesystem.getSeparator()+fileneym);
 							}
-							*/
 						}
 					},
 
@@ -202,19 +223,9 @@ var data = [
 
 $("#openproject").click(function(){ openProject(); });
 $("#savefile").click(function(){ saveFile(currentlyopen); });
-/*
 $("#nameryesbtn").click(function(){
-	var fileneym = $('#namertext').text();
-	var passer = { 
-		"title" : fileneym, 
-		"attr" : { "href" : manipulatornodeanddata.data.context.pathname+Ti.Filesystem.getSeparator()+fileneym } 
-	};
-	manipulatornodeanddata.node.create(manipulatornodeanddata.data, undefined, fileneym, undefined, true);
-	//console.dir(this);
-	console.log(data.context.pathname+Ti.Filesystem.getSeparator()+fileneym);
-	createFile(data.context.pathname+Ti.Filesystem.getSeparator()+fileneym);
+
 });
-*/
 
 function openProject () {
 	var curWin = Ti.UI.getCurrentWindow();
@@ -222,7 +233,7 @@ function openProject () {
     if(fn.length == 0) return;      //User canceled so do nothing
     	//chosen directory = fn[0]
     	curprojectdir = fn[0];
-    	filesystem = fillFilesystem(fn[0]);
+    	filesystem = fillFilesystemWithRoot(fn[0]);
     	$('#treeview').empty();
     	setTree(filesystem);
   	},{
