@@ -1332,6 +1332,7 @@
 					f.call(this, { "obj" : obj, "new_name" : new_name, "old_name" : old_name });
 				});
 			},
+			
 			create : function (obj, position, js, callback, skip_rename) {
 				var t, _this = this;
 				obj = this._get_node(obj);

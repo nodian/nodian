@@ -48,7 +48,14 @@
 
 				<a href="index.html" class="brand"><img src="base/logowrit.png"></a>
 				<div class="nav-collapse collapse" id="nav-collapse-03">
+
 					<ul class="nav">
+						<li>
+							<a class="fui-folder" id="openproject"></a>
+						</li>
+						<li>
+							<a class="fui-export" id="savefile"></a>
+						</li>
 						<li>
 							<a href="npm.html">
 								NPM
@@ -93,6 +100,27 @@
     </div><!-- /.modal-dialog -->
   </div><!-- /.modal -->
 
+  <!-- Namer Modal -->
+  <div class="modal fade" id="namer" tabindex="-1" role="dialog" aria-labelledby="namerNodian" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+          <h4 class="modal-title" id="namertitle"></h4>
+        </div>
+        <div class="modal-body">
+			<div class="control-group huge">
+			    <input class="span4" type="text" id="namertext" placeholder="Name for it..." value=""></input>
+			</div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-primary"  id="nameryesbtn"></button>
+          <button type="button" class="btn btn-primary" data-dismiss="modal" id="namernobtn"></button>
+        </div>
+      </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+  </div><!-- /.modal -->
+
   <!-- Yes No Modal -->
   <div class="modal fade" id="yesno" tabindex="-1" role="dialog" aria-labelledby="yesnoNodian" aria-hidden="true">
     <div class="modal-dialog">
@@ -114,6 +142,7 @@
 
 	<div id="core">
 	<a data-toggle="modal" href="#alert" id="alerttoggle"></a>
+	<a data-toggle="modal" href="#namer" id="namertoggle"></a>
 
 		<div id="treeview" style="width: 30%; float:left; overflow: auto;">
   <!-- Button trigger modal -->
@@ -133,6 +162,27 @@
 
 		<div style="clear:both"></div>
 	</div>
+
+<script type="text/php">
+
+function IsBinary($file) 
+{ 
+  if (file_exists($file)) { 
+    if (!is_file($file)) return 0; 
+
+    $fh  = fopen($file, "r"); 
+    $blk = fread($fh, 512); 
+    fclose($fh); 
+    clearstatcache(); 
+
+    return ( 
+      0 or substr_count($blk, "^ -~", "^\r\n")/512 > 0.3 
+        or substr_count($blk, "\x00") > 0 
+    ); 
+  } 
+  return 0; 
+}
+</script>
 
 </body>
 
@@ -158,13 +208,12 @@
 <script type="text/javascript" src="base/jstree/jquery.jstree.js"></script>
 <script type="text/javascript" src="base/jqwidgets/jqx-all.js"></script>
 
+<script type="text/javascript" src="base/ace/ace-builds/src-noconflict/ace.js" charset="utf-8"></script>
 
 <!-- OUR SCRIPTS -->
 <script type="text/javascript" src="base/gui.js"></script>
-<script type="text/javascript" src="base/tree.js"></script>
+<script type="text/javascript" src="base/filesystem.js"></script>
 <!-- end OUR SCRIPTS -->
-
-<script type="text/javascript" src="base/ace/ace-builds/src-noconflict/ace.js" charset="utf-8"></script>
 
 <script type="text/javascript">
 	var editor = ace.edit("editor");
