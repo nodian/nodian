@@ -15,6 +15,17 @@ var currentlyopen = ""; // File that currently opened in editor
 var curprojectdir = ""; // Currently opened projecy dir
 
 /**
+ * Wait extension for jquery
+ */
+(function($) {
+    $.wait = function(time) {
+         return $.Deferred(function(dfd) {
+               setTimeout(dfd.resolve, time); // use setTimeout internally. 
+         }).promise();
+    }
+}(jQuery));
+
+/**
  * Editor commands in here
  */
 editor.commands.addCommands([
@@ -141,6 +152,8 @@ function nameit (title) {
 	submitRequest('namertoggle');
 }
 
+var willnew = new Object();
+
 function setTree (tree) {
 	$(function () {
 		$("#treeview").jstree({ 
@@ -162,18 +175,11 @@ function setTree (tree) {
 							var fh = Ti.Filesystem.getFile(data.context.pathname, '');
 							if(fh.isFile()){
 								var fhparent = fh.parent();
-
+								willnew = fhparent;
+								nameit('File name will be');
 							}else{
-								//nameit('File Name');
-								var fileneym = $('#namertext').text();
-								var passer = {
-									"title" : fileneym, 
-									"attr" : { "href" : this.data.context.pathname+Ti.Filesystem.getSeparator()+fileneym } 
-								};
-								this.create(data, undefined, fileneym, undefined, true);
-								//console.dir(this);
-								console.log(data.context.pathname+Ti.Filesystem.getSeparator()+fileneym);
-								createFile(data.context.pathname+Ti.Filesystem.getSeparator()+fileneym);
+								willnew = fh+Ti.Filesystem.getSeparator();
+								nameit('File name will be');
 							}
 						}
 					},
@@ -224,7 +230,14 @@ var data = [
 $("#openproject").click(function(){ openProject(); });
 $("#savefile").click(function(){ saveFile(currentlyopen); });
 $("#nameryesbtn").click(function(){
-
+	var file = Ti.Filesystem.getFile(willnew, document.getElementById('namertext').value);
+	//alert(document.getElementById('namertext').value);    
+	file.write('');
+	$.wait(1000).then(function(){ 
+		filesystem = fillFilesystemWithRoot(curprojectdir);
+		$('#treeview').empty();
+	    setTree(filesystem);
+	});
 });
 
 function openProject () {
@@ -233,8 +246,7 @@ function openProject () {
     if(fn.length == 0) return;      //User canceled so do nothing
     	//chosen directory = fn[0]
     	curprojectdir = fn[0];
-    	filesystem = fillFilesystemWithRoot(fn[0]);
-    	$('#treeview').empty();
+    	filesystem = fillFilesystemWithRoot(curprojectdir);
     	setTree(filesystem);
   	},{
   		"title": "Nodian: Open Project",
