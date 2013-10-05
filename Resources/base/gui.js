@@ -9,8 +9,16 @@ function editorheight () {
 
 editorheight();
 
+function treeviewheight () {
+	var heig = $( window ).height();
+	$( '#treeview' ).height( heig - 56 );
+}
+
+treeviewheight();
+
 $( window ).resize(function() {
 	editorheight();
+	treeviewheight();
 });
 
 function loadNPM(){

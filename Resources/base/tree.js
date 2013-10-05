@@ -29,13 +29,23 @@ function fillFilesystem(projectpath){
     		di.attr = new Object();
     		di.data = new Object();
     		di.data.attr = new Object();
+    		di.children = new Array();
 
     		di.attr.id = i;
-    		di.data.title = dir_total[i].nativePath().match(/(\/\w*)$/i);
-    		di.data.title = first(di.data.title);
+    		//di.data.title = dir_total[i].nativePath().match(/(\/\w*)$/i);
+    		var lst = new Array();
+    		if(Ti.Platform.getName() == 'Darwin' || Ti.Platform.getName() == 'Linux'){
+    			lst = dir_total[i].nativePath().split('/');
+    		}else{
+    			lst = dir_total[i].nativePath().split('\\');
+    		}
+    		di.data.title = lst[lst.length - 1];
     		di.data.attr.href = dir_total[i].nativePath();
-    		if(di.data.title !== null || di.data.title != undefined)
+    		if(di.data.title !== null || di.data.title != undefined){
     			fs[i] = di;
+    			di.children = fillFilesystem(di.data.attr.href);
+    		}
+
     	}else{
     		var fi = new Object();
     		fi.attr = new Object();
@@ -43,24 +53,55 @@ function fillFilesystem(projectpath){
     		fi.data.attr = new Object();
 
     		fi.attr.id = i;
-    		fi.data.title = dir_total[i].nativePath().match(/(\w*\..*)$/i);
-    		fi.data.title = first(fi.data.title);
+    		// fi.data.title = dir_total[i].nativePath().match(/(\w*\..*)$/i);
+    		var lst = new Array();
+    		if(Ti.Platform.getName() == 'Darwin' || Ti.Platform.getName() == 'Linux'){
+    			lst = dir_total[i].nativePath().split('/');
+    		}else{
+    			lst = dir_total[i].nativePath().split('\\');
+    		}
+    		fi.data.title = lst[lst.length - 1];
     		fi.data.attr.href = dir_total[i].nativePath();
     		if(fi.data.title !== null || fi.data.title != undefined)
     			fs[i] = fi;
     	}
         //alert(dir_files[i].toString());
     }
-    console.log(fs);
     return fs;
 }
 
 filesystem = fillFilesystem('~/lantern');
 
+function submitRequest(buttonId) {
+    if (document.getElementById(buttonId) == null
+            || document.getElementById(buttonId) == undefined) {
+        return;
+    }
+    if (document.getElementById(buttonId).dispatchEvent) {
+        var e = document.createEvent("MouseEvents");
+        e.initEvent("click", true, true);
+        document.getElementById(buttonId).dispatchEvent(e);
+    } else {
+        document.getElementById(buttonId).click();
+    }
+}
+
+function warn (title, text, btn) {
+	$('#alerttitle').text(title);
+	$('#alerttext').text(text);
+	$('#declinealertbtn').text(btn);
+	submitRequest('alerttoggle');
+}
+
+function erroroccured (text) {
+	warn('Error Occured', text, 'Dismiss');
+}
+
 function setTree (tree) {
 	$(function () {
 		$("#treeview").jstree({ 
-			"plugins" : ["themes","json_data","ui","crrm", "dnd", "contextmenu", "types"],
+			// "plugins" : ["themes","json_data","ui","crrm", "dnd", "contextmenu", "types"], DND'yi ( drag drop )sonra yap
+			"plugins" : ["themes","json_data","ui","crrm", "contextmenu", "types"],
 			//Themes sections
 			"themes" : {
 				"theme" : "apple",
@@ -71,14 +112,13 @@ function setTree (tree) {
 			"json_data" : {
 				"data" : tree
 			}
-		}).bind("select_node.jstree", function (e, data) { alert(data.rslt.obj.data("id")); });
+		}).bind("select_node.jstree", function (e, data) {
+			erroroccured(data.rslt.obj.context.pathname);
+			console.log(data); });
 	});
 }
 
-
-
 /*
-
 var data = [
 					{ 
 						"attr" : { "id" : "li.node.id1" }, 
@@ -92,3 +132,4 @@ var data = [
 */
 
 setTree(filesystem);
+

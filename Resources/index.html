@@ -76,8 +76,48 @@
 		</div>
 	</div> <!-- /navbar-inverse -->
 
+  <!-- Alert Modal -->
+  <div class="modal fade" id="alert" tabindex="-1" role="dialog" aria-labelledby="alertNodian" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+          <h4 class="modal-title" id="alerttitle">Error occured</h4>
+        </div>
+        <div class="modal-body" id="alerttext">
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-primary" data-dismiss="modal" id="declinealertbtn"></button>
+        </div>
+      </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+  </div><!-- /.modal -->
+
+  <!-- Yes No Modal -->
+  <div class="modal fade" id="yesno" tabindex="-1" role="dialog" aria-labelledby="yesnoNodian" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+          <h4 class="modal-title" id="yesnotitle"></h4>
+        </div>
+        <div class="modal-body" id="yesnotext">
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal" id="declineyesnobtn"></button>
+          <button type="button" class="btn btn-primary" id="acceptyesnobtn"></button>
+        </div>
+      </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+  </div><!-- /.modal -->
+
+
 	<div id="core">
-		<div id="treeview" style="width: 30%; float:left;">
+	<a data-toggle="modal" href="#alert" id="alerttoggle"></a>
+
+		<div id="treeview" style="width: 30%; float:left; overflow: auto;">
+  <!-- Button trigger modal -->
+  		
 
 		</div>
 
@@ -98,6 +138,7 @@
 
 
 <script type="text/javascript" src="base/jquery-1.10.2.js"></script>
+<script type="text/javascript" src="base/underscore.js"></script>
 
 
 <!-- FOR UI -->
