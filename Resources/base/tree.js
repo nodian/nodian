@@ -10,6 +10,53 @@ $(function () {
 			// each plugin you have included can have its own config object
 */
 
+var filesystem = [];
+
+function first(p){for(var i in p)return p[i];}
+
+function fillFilesystem(projectpath){
+	// /Users/core/etc tipinde olacak
+	// watchdog yaparken modificationTimestamp( ) kullan
+	var fs = [];
+    var dir = Ti.Filesystem.getFile(projectpath);
+    var dir_total = dir.getDirectoryListing();
+    // (\w*\/\w*\..*) i kaka/ter.jpg
+    // (\/\w*)$ i /kaka
+    // (\w*\..*)$ i kaka.jpg
+    for (var i=1;i<dir_total.length;i++){ 
+    	if (dir_total[i].isDirectory()) {
+    		var di = new Object();
+    		di.attr = new Object();
+    		di.data = new Object();
+    		di.data.attr = new Object();
+
+    		di.attr.id = i;
+    		di.data.title = dir_total[i].nativePath().match(/(\/\w*)$/i);
+    		di.data.title = first(di.data.title);
+    		di.data.attr.href = dir_total[i].nativePath();
+    		if(di.data.title !== null || di.data.title != undefined)
+    			fs[i] = di;
+    	}else{
+    		var fi = new Object();
+    		fi.attr = new Object();
+    		fi.data = new Object();
+    		fi.data.attr = new Object();
+
+    		fi.attr.id = i;
+    		fi.data.title = dir_total[i].nativePath().match(/(\w*\..*)$/i);
+    		fi.data.title = first(fi.data.title);
+    		fi.data.attr.href = dir_total[i].nativePath();
+    		if(fi.data.title !== null || fi.data.title != undefined)
+    			fs[i] = fi;
+    	}
+        //alert(dir_files[i].toString());
+    }
+    console.log(fs);
+    return fs;
+}
+
+filesystem = fillFilesystem('~/lantern');
+
 function setTree (tree) {
 	$(function () {
 		$("#treeview").jstree({ 
@@ -28,19 +75,20 @@ function setTree (tree) {
 	});
 }
 
+
+
+/*
+
 var data = [
-					{ 
-						"data" : "arrayUS node", 
-						"metadata" : { id : 23 },
-						"children" : [ "Child andrud 1", "A Child 2" ]
-					},
 					{ 
 						"attr" : { "id" : "li.node.id1" }, 
 						"data" : { 
 							"title" : "Long format demo", 
 							"attr" : { "href" : "#" } 
-						} 
+						},
+						"children" : [ "Child andrud 1", "A Child 2" ]
 					}
 			];
+*/
 
-setTree(data);
+setTree(filesystem);
