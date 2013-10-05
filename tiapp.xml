@@ -6,7 +6,7 @@
 <version>1.0</version>
 <publisher>nodian</publisher>
 <url>http://nodian.org</url>
-<icon>logo.png</icon>
+<icon>default_app_logo.png</icon>
 <copyright>2013 by nodian</copyright>
 <!-- Window Definition - these values can be edited -->
 <window>
