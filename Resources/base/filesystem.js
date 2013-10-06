@@ -153,6 +153,7 @@ function nameit (title) {
 }
 
 var willnew = new Object();
+var rename = 0;
 
 function setTree (tree) {
 	$(function () {
@@ -172,6 +173,7 @@ function setTree (tree) {
 					"newfile": {
 						"label"		: "New File",
 						"action"	: function (data) {
+							rename = 0;
 							var fh = Ti.Filesystem.getFile(data.context.pathname, '');
 							if(fh.isFile()){
 								var fhparent = fh.parent();
@@ -184,7 +186,7 @@ function setTree (tree) {
 						}
 					},
 
-					"deleter": {
+					"delete": {
 						"label"		: "Delete",
 						"action"	: function (data) {
 							var fh = Ti.Filesystem.getFile(data.context.pathname, '');
@@ -206,23 +208,21 @@ function setTree (tree) {
 						}
 					},
 
-
 					"rename" : {
 						// The item label
-						"label"				: "Rename",
-						// The function to execute upon a click
-						"action"			: function (obj) { this.rename(obj); },
-						// All below are optional 
-						"_disabled"			: false,		// clicking the item won't do a thing
-						"_class"			: "class",	// class is applied to the item LI node
-						"separator_before"	: false,	// Insert a separator before the item
-						"separator_after"	: true,		// Insert a separator after the item
-						// false or string - if does not contain `/` - used as classname
-						"icon"				: false,
-						"submenu"			: { 
-							/* Collection of objects (the same structure) */
+						"label"		: "Rename",
+						"action"	: function (data) {
+							rename = 1;
+							var fh = Ti.Filesystem.getFile(data.context.pathname, '');
+								if(fh.isFile()){
+									willnew = fh;
+									nameit('Rename the file');
+								}else{
+									willnew = fh;
+									nameit('Rename the directory');
+								}
+							}
 						}
-					}
 					/* MORE ENTRIES ... */
 				}
 			},
@@ -253,14 +253,28 @@ var data = [
 $("#openproject").click(function(){ openProject(); });
 $("#savefile").click(function(){ saveFile(currentlyopen); });
 $("#nameryesbtn").click(function(){
-	var file = Ti.Filesystem.getFile(willnew, document.getElementById('namertext').value);
-	//alert(document.getElementById('namertext').value);    
-	file.write('');
-	$.wait(1000).then(function(){ 
-		filesystem = fillFilesystemWithRoot(curprojectdir);
-		$('#treeview').empty();
-	    setTree(filesystem);
-	});
+	if(rename == 0){
+		var file = Ti.Filesystem.getFile(willnew, document.getElementById('namertext').value);
+		//alert(document.getElementById('namertext').value);    
+		file.write('');
+		$.wait(1000).then(function(){ 
+			filesystem = fillFilesystemWithRoot(curprojectdir);
+			//$('#treeview').empty();
+		    setTree(filesystem);
+		});
+	}else{
+		var file = Ti.Filesystem.getFile(willnew, '');
+		divide = file.nativePath().split(Ti.Filesystem.getSeparator());
+		//document.getElementById('namertext').placeholder = divide[divide.length - 1].toString();
+		divide[divide.length - 1] = document.getElementById('namertext').value;
+		var renamed = divide.join(Ti.Filesystem.getSeparator());
+		file.rename(renamed);
+
+		$.wait(1000).then(function(){ 
+			filesystem = fillFilesystemWithRoot(curprojectdir);
+		    setTree(filesystem);
+		});
+	}
 });
 
 function openProject () {
