@@ -152,7 +152,7 @@ function nameit (title) {
 	submitRequest('namertoggle');
 }
 
-var willnew = new Object();
+var willnew = "";
 var rename = 0;
 
 function setTree (tree) {
@@ -212,15 +212,10 @@ function setTree (tree) {
 						// The item label
 						"label"		: "Rename",
 						"action"	: function (data) {
-							rename = 1;
-							var fh = Ti.Filesystem.getFile(data.context.pathname, '');
-								if(fh.isFile()){
-									willnew = fh;
-									nameit('Rename the file');
-								}else{
-									willnew = fh;
-									nameit('Rename the directory');
-								}
+								console.dir(data);
+								rename = 1;
+								willnew = data.context.pathname;
+								nameit('Rename');
 							}
 						}
 					/* MORE ENTRIES ... */
@@ -263,12 +258,18 @@ $("#nameryesbtn").click(function(){
 		    setTree(filesystem);
 		});
 	}else{
-		var file = Ti.Filesystem.getFile(willnew, '');
-		divide = file.nativePath().split(Ti.Filesystem.getSeparator());
+		//var file = Ti.Filesystem.getFile(willnew, '');
+		divide = willnew.trim().split(Ti.Filesystem.getSeparator());
+		//console.log(divide.toString());
 		//document.getElementById('namertext').placeholder = divide[divide.length - 1].toString();
 		divide[divide.length - 1] = document.getElementById('namertext').value;
 		var renamed = divide.join(Ti.Filesystem.getSeparator());
-		file.rename(renamed);
+		//console.log(renamed);
+		//file.rename(renamed.toString());
+		/** 
+		 * ruby running
+		 */
+		renamerfun(willnew, renamed);
 
 		$.wait(1000).then(function(){ 
 			filesystem = fillFilesystemWithRoot(curprojectdir);
@@ -276,6 +277,10 @@ $("#nameryesbtn").click(function(){
 		});
 	}
 });
+
+function renamerfun (oldone, newone) {
+	renameit(oldone, newone);
+}
 
 function openProject () {
 	var curWin = Ti.UI.getCurrentWindow();
@@ -327,7 +332,8 @@ function saveFile (argument) {
 }
 
 function readFile (argument) {
-	var readfi= Ti.Filesystem.getFile(argument, '');   
+	var readfi= Ti.Filesystem.getFile(argument, '');  
+	console.log('READ FILE'+argument); 
 	if (readfi.isDirectory() == true) {
 		return;
 	}else{
