@@ -152,7 +152,8 @@ function nameit (title) {
 	submitRequest('namertoggle');
 }
 
-var willnew = "";
+var willnew = new Object();
+var renfile = "";
 var rename = 0;
 
 function setTree (tree) {
@@ -186,6 +187,28 @@ function setTree (tree) {
 						}
 					},
 
+					"newfolder": {
+						"label"		: "New Folder",
+						"action"	: function (data) {
+							rename = -1;
+							var fh = Ti.Filesystem.getFile(data.context.pathname, '');
+							if(fh.isFile()){
+								console.log('PATH : '+data.context.pathname);
+								var division = data.context.pathname.toString().trim().split(Ti.Filesystem.getSeparator());
+								division.pop();
+								console.log(division);
+								console.log("HEIL"+division);
+								var pa = division.join(Ti.Filesystem.getSeparator());
+								console.log('LAST PATH: '+pa);
+								willnew = Ti.Filesystem.getFile(pa.toString(), '');
+								nameit('Folder name will be');
+							}else{
+								willnew = fh;
+								nameit('Folder name will be');
+							}
+						}
+					},
+
 					"delete": {
 						"label"		: "Delete",
 						"action"	: function (data) {
@@ -214,7 +237,7 @@ function setTree (tree) {
 						"action"	: function (data) {
 								console.dir(data);
 								rename = 1;
-								willnew = data.context.pathname;
+								renfile = data.context.pathname;
 								nameit('Rename');
 							}
 						}
@@ -257,9 +280,9 @@ $("#nameryesbtn").click(function(){
 			//$('#treeview').empty();
 		    setTree(filesystem);
 		});
-	}else{
+	}else if(rename == 1) {
 		//var file = Ti.Filesystem.getFile(willnew, '');
-		divide = willnew.trim().split(Ti.Filesystem.getSeparator());
+		divide = renfile.trim().split(Ti.Filesystem.getSeparator());
 		//console.log(divide.toString());
 		//document.getElementById('namertext').placeholder = divide[divide.length - 1].toString();
 		divide[divide.length - 1] = document.getElementById('namertext').value;
@@ -269,10 +292,18 @@ $("#nameryesbtn").click(function(){
 		/** 
 		 * ruby running
 		 */
-		renamerfun(willnew, renamed);
+		renamerfun(renfile, renamed);
 
 		$.wait(1000).then(function(){ 
 			filesystem = fillFilesystemWithRoot(curprojectdir);
+		    setTree(filesystem);
+		});
+	} else {
+		var file = Ti.Filesystem.getFile(willnew, document.getElementById('namertext').value);
+		file.createDirectory();
+		$.wait(1000).then(function(){ 
+			filesystem = fillFilesystemWithRoot(curprojectdir);
+			//$('#treeview').empty();
 		    setTree(filesystem);
 		});
 	}
@@ -297,7 +328,7 @@ function openProject () {
 }
 
 function deleteFolder (argument) {
-	// body...
+	// body... YAPILDI
 }
 
 function createFolder (argument) {
@@ -305,7 +336,7 @@ function createFolder (argument) {
 }
 
 function updateFolder (argument) {
-	// body...
+	// body... YAPILDI
 }
 
 function createFile (argument) {
