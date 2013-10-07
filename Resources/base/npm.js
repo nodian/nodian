@@ -1,4 +1,6 @@
 
+var searchlist = new Object();
+
 function getPackageJson (startKeyword, endKeyword, grouplevel) {
 	function() {
 		var kafa = "http://registry.npmjs.org/-/_view/byKeyword?startkey=[\"";
