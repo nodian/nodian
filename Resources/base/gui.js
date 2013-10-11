@@ -16,9 +16,17 @@ function treeviewheight () {
 
 treeviewheight();
 
+function packageheight () {
+	var heig = $( window ).height();
+	$( '#packlist' ).height( heig - 98 );
+}
+
+packageheight();
+
 $( window ).resize(function() {
 	editorheight();
 	treeviewheight();
+	packageheight();
 });
 
 function loadNPM(){
