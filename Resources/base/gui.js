@@ -23,10 +23,18 @@ function packageheight () {
 
 packageheight();
 
+function leanmiddleheight () {
+	var heig = $( window ).height();
+	$( '#leanmiddle' ).height( heig );
+}
+
+leanmiddleheight();
+
 $( window ).resize(function() {
 	editorheight();
 	treeviewheight();
 	packageheight();
+	leanmiddleheight();
 });
 
 function loadNPM(){
