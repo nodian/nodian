@@ -14,9 +14,22 @@ var editor = ace.edit("editor");
 var currentlyopen = ""; // File that currently opened in editor
 var curprojectdir = ""; // Currently opened projecy dir
 
+var globaldir = Ti.Filesystem.getFile(Ti.Filesystem.getUserDirectory(), ".nodian");
 var projspec = new Object(); // Nodian project config File Object
 
 var config = new Object(); // Nodian project config object
+var globalconfig = new Object(); // Nodian project config object
+
+window.onload = function(){
+	checkGlobalConfig();
+};
+
+// Save cycler
+window.setInterval(function(){
+  // call your function here
+  // 6 seconds
+  saveNodianConfig(projspec);
+}, 1000*6);
 
 /**
  * Wait extension for jquery
@@ -317,16 +330,20 @@ function renamerfun (oldone, newone) {
 	renameit(oldone, newone);
 }
 
-function openProject () {
+function openProject (openPath) {
 	var curWin = Ti.UI.getCurrentWindow();
-	curWin.openFolderChooserDialog(function(fn){
-    if(fn.length == 0) return;      //User canceled so do nothing
-    	//chosen directory = fn[0]
-		checkProjNodeJS(fn[0]);
-  	},{
-  		"title": "Nodian: Open Project",
-  		"path": Ti.Filesystem.getUserDirectory().nativePath()
-  	});
+	if (openPath == undefined) {
+		curWin.openFolderChooserDialog(function(fn){
+	    if(fn.length == 0) return;      //User canceled so do nothing
+	    	//chosen directory = fn[0]
+			checkProjNodeJS(fn[0]);
+	  	},{
+	  		"title": "Nodian: Open Project",
+	  		"path": Ti.Filesystem.getUserDirectory().nativePath()
+	  	});
+	}else{
+		checkProjNodeJS(openPath);
+	}
 }
 
 function deleteFolder (argument) {
@@ -380,7 +397,7 @@ function readFile (argument) {
 					Stream.open(Ti.Filesystem.MODE_READ);     
 					contents = Stream.read();
 					console.log(contents.lenght);
-					editor.setValue(contents.toString());
+					editor.setValue(contents.toString(), -1);
 					Stream.close();
 					//alert( contents );
 					//var editor = ace.edit("editor");
@@ -415,12 +432,14 @@ function checkProjNodeJS (filepath) {
 			Stream.close();
 
 			config = Ti.JSON.parse(contents.toString());
-			// load config
 
-			warn('Nodian project created.', 'Nodian project has created in this directory', 'OK');
+			console.dir(config);
+			// load config
+			loadNodianConfig(config);
+			warn('Nodian project loaded.', 'Nodian project has loaded in this directory', 'OK');
 		}else{
 			// save config with defaults
-
+			saveNodianConfig(projspec);
 			warn('Nodian project created.', 'Nodian project has created in this directory', 'OK');
 		}
 		curprojectdir = filepath;
@@ -432,27 +451,112 @@ function checkProjNodeJS (filepath) {
 
 }
 
-function saveNodianConfig (filepath) {
+
+function checkGlobalConfig (writeforced) {
+	if(globaldir.exists()){
+		var confile = Ti.Filesystem.getFile(globaldir, '.config');
+		if(confile.exists() && (
+			writeforced == false 
+			|| writeforced == undefined 
+			|| writeforced == null)){
+
+			var Stream = Ti.Filesystem.getFileStream(confile);
+			Stream.open(Ti.Filesystem.MODE_READ);
+			var contents = Stream.read();
+			console.log("global .config content lenght: " + contents.lenght);
+			Stream.close();
+
+			globalconfig = Ti.JSON.parse(contents.toString());
+
+			console.dir(globalconfig);
+			// load global config
+
+			/**
+			 * == GLOBAL Specification
+			 * 
+			 * @lastproject : Last project path
+			 */
+
+			openProject(globalconfig.lastproject);
+		}else{
+			globalconfig.lastproject = curprojectdir.toString();
+
+			// End Default values for config
+
+			var Stream = Ti.Filesystem.getFileStream(confile);
+			Stream.open(Ti.Filesystem.MODE_WRITE);
+			var data = JSON.stringify(globalconfig, null, 4);
+			Stream.write(data);
+			Stream.close();
+		}
+	}else{
+		if(globaldir.createDirectory()){
+			checkGlobalConfig();
+		}else{
+			erroroccured('When creating global directory.');
+		}
+	}
+}
+
+
+function saveNodianConfig (projectspec) {
 	/**
 	 * == Specification
 	 * 
+	 * @projectpath : Project path
 	 * @lastfile : Opened last file
-	 * @
 	 * @nodecomm : Node.JS command for running
-	 * @
 	 * 
 	 * -- Editor
-	 * @fontsize : Fonstsize of editor
+	 * @fontsize : Fonstsize of editor (Default 12px)
 	 * @theme : Theme of the editor (Default solarized_dark)
 	 * @lintcheck : Lint syntax checking (Default true)
 	 * @cursor : Current cursor position (Default 0)
 	 * @tabsize : Tab size in project (Default 4)
 	 */
 
+	// Default values for config
+	config.projectpath = curprojectdir.toString();
+	config.lastfile = currentlyopen.toString();
+	config.nodecomm = document.getElementById('nodecomm').value;
 
+	config.fontsize = 12;
+	config.theme = "ace/theme/solarized_dark";
+	config.lintcheck = true;
+	config.cursor = editor.selection.getCursor();
+	config.tabsize = 4;
+	// End Default values for config
+
+	var Stream = Ti.Filesystem.getFileStream(projectspec);
+	Stream.open(Ti.Filesystem.MODE_WRITE);
+	var data = JSON.stringify(config, null, 4);
+	Stream.write(data);
+	Stream.close();
+
+	// write to global config
+	checkGlobalConfig(true);
 }
 
 function loadNodianConfig ( conf ) {
 	// body...
-}
+	config = conf;
+	
+	try{
+		curprojectdir = config.projectpath;
+    	filesystem = fillFilesystemWithRoot(curprojectdir);
+    	setTree(filesystem);
 
+		currentlyopen = config.lastfile;
+		readFile(currentlyopen);
+	}catch(e){
+		console.log(e.toString());
+	}
+
+	document.getElementById('nodecomm').value = config.nodecomm;
+
+	document.getElementById('editor').style.fontSize=config.fontsize+'px';
+	editor.setTheme(config.theme);
+	editor.getSession().setUseWorker(config.lintcheck);
+	editor.moveCursorTo(config.cursor.row, config.cursor.column);
+	editor.getSession().setTabSize(config.tabsize);
+}

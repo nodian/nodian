@@ -52,10 +52,10 @@
 
 					<ul class="nav">
 						<li>
-							<a class="fui-folder" id="openproject"> Project</a>
+							<a class="fui-folder" href="#" id="openproject"> Project</a>
 						</li>
 						<li>
-							<a class="fui-export" id="savefile"> Save</a>
+							<a class="fui-export" href="#" id="savefile"> Save</a>
 						</li>
 						<li>
 							<a href="npm.html">
@@ -79,7 +79,7 @@
 								<div style="margin: 20px;">
 									<button class="btn btn-info" style="margin-right: 5px;"><span class="fui-play"></span> Run Node </button>
 									<button class="btn btn-warning"><span class="fui-cross"></span> Reset Node </button>
-									<textarea class="span6" style="margin: 20px 0px 3px 0px; resize: none;" rows="1" placeholder="Instance command"></textarea>
+									<textarea id="nodecomm" class="span6" style="margin: 20px 0px 3px 0px; resize: none;" rows="1" placeholder="Instance command"></textarea>
 									<p class="lead">Console</p>
 									<textarea class="span6" style="margin: 0px 0px; resize: none;" rows="12" placeholder=""></textarea>
 								</div>
@@ -252,7 +252,6 @@ function IsBinary($file)
 
 	$(window).on('resize', setEditorHeight);
 	setEditorHeight();
-
 
 </script>
 
