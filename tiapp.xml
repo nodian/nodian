@@ -13,10 +13,10 @@
 <id>initial</id>
 <title>nodian</title>
 <url>app://index.html</url>
-<width>1400</width>
+<width>1000</width>
 <max-width>3000</max-width>
 <min-width>790</min-width>
-<height>700</height>
+<height>600</height>
 <max-height>3000</max-height>
 <min-height>500</min-height>
 <fullscreen>false</fullscreen>
