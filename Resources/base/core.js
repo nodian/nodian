@@ -14,6 +14,10 @@ var editor = ace.edit("editor");
 var currentlyopen = ""; // File that currently opened in editor
 var curprojectdir = ""; // Currently opened projecy dir
 
+var projspec = new Object(); // Nodian project config File Object
+
+var config = new Object(); // Nodian project config object
+
 /**
  * Wait extension for jquery
  */
@@ -318,9 +322,7 @@ function openProject () {
 	curWin.openFolderChooserDialog(function(fn){
     if(fn.length == 0) return;      //User canceled so do nothing
     	//chosen directory = fn[0]
-    	curprojectdir = fn[0];
-    	filesystem = fillFilesystemWithRoot(curprojectdir);
-    	setTree(filesystem);
+		checkProjNodeJS(fn[0]);
   	},{
   		"title": "Nodian: Open Project",
   		"path": Ti.Filesystem.getUserDirectory().nativePath()
@@ -388,5 +390,69 @@ function readFile (argument) {
 			}
 		} 
 	}
+}
+
+
+/**
+ * Projenin Node.JS projesi olup olmadığını anlayan kısım
+ * Ayrıca Node.JS projesiyse Nodian'ın özelliklerinin yazılı olduğu dosyayı kaydeder aynı patikaya
+ */
+
+function checkProjNodeJS (filepath) {
+	// package.json var mı?
+	var pkg = Ti.Filesystem.getFile(filepath, "package.json");
+	// node_modules var mı?
+	var modulesdir = Ti.Filesystem.getFile(filepath, "node_modules");
+	// Projenin nodian tarafından açılıp açılmadığını tutar ayrıca konfigürasyonlar JSON olarak
+	projspec = Ti.Filesystem.getFile(filepath, ".nodianspec");
+	
+	if (pkg.exists() || modulesdir.exists()) {
+		if(projspec.exists()){
+			var Stream = Ti.Filesystem.getFileStream(projspec);
+			Stream.open(Ti.Filesystem.MODE_READ);
+			var contents = Stream.read();
+			console.log(".nodianspec content lenght: " + contents.lenght);
+			Stream.close();
+
+			config = Ti.JSON.parse(contents.toString());
+			// load config
+
+			warn('Nodian project created.', 'Nodian project has created in this directory', 'OK');
+		}else{
+			// save config with defaults
+
+			warn('Nodian project created.', 'Nodian project has created in this directory', 'OK');
+		}
+		curprojectdir = filepath;
+    	filesystem = fillFilesystemWithRoot(curprojectdir);
+    	setTree(filesystem);
+	}else{
+		erroroccured("Traversed directory doesn't belong to a Node.JS project.");
+	}
+
+}
+
+function saveNodianConfig (filepath) {
+	/**
+	 * == Specification
+	 * 
+	 * @lastfile : Opened last file
+	 * @
+	 * @nodecomm : Node.JS command for running
+	 * @
+	 * 
+	 * -- Editor
+	 * @fontsize : Fonstsize of editor
+	 * @theme : Theme of the editor (Default solarized_dark)
+	 * @lintcheck : Lint syntax checking (Default true)
+	 * @cursor : Current cursor position (Default 0)
+	 * @tabsize : Tab size in project (Default 4)
+	 */
+
+
+}
+
+function loadNodianConfig ( conf ) {
+	// body...
 }
 

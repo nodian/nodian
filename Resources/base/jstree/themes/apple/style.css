@@ -19,7 +19,7 @@
 .jstree-apple a .jstree-icon { background-position:-56px -20px; }
 .jstree-apple a.jstree-loading .jstree-icon { background:url("throbber.gif") center center no-repeat !important; }
 
-.jstree-apple.jstree-focused { background:#2ecc71; }
+.jstree-apple.jstree-focused { background: #1ABC9C; }
 
 .jstree-apple .jstree-no-dots li, 
 .jstree-apple .jstree-no-dots .jstree-leaf > ins { background:transparent; }
@@ -55,7 +55,7 @@
 #vakata-contextmenu.jstree-apple-context .vakata-hover > a { padding:0 5px; background:#e8eff7; border:1px solid #aecff7; color:black; -moz-border-radius:2px; -webkit-border-radius:2px; border-radius:2px; }
 #vakata-contextmenu.jstree-apple-context li.jstree-contextmenu-disabled a, 
 #vakata-contextmenu.jstree-apple-context li.jstree-contextmenu-disabled a:hover { color:silver; background:transparent; border:0; padding:1px 4px; }
-#vakata-contextmenu.jstree-apple-context li.vakata-separator { background: #2ecc71; border-top:1px solid #e0e0e0; margin:0; }
+#vakata-contextmenu.jstree-apple-context li.vakata-separator { background: #1ABC9C; border-top:1px solid #e0e0e0; margin:0; }
 #vakata-contextmenu.jstree-apple-context li ul { margin-left:-4px; }
 
 /* TODO: IE6 support - the `>` selectors */
