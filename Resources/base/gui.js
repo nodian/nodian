@@ -1,11 +1,10 @@
-
 // Editor Load 
 // SİLME!
 
 function editorheight () {
 	// 56 inverse olan
 	var heig = $( window ).height();
-	$( '#editor-container' ).height( heig - 82 );
+	$( '#editor-container' ).height( heig - 83 );
 }
 
 editorheight();
@@ -13,7 +12,7 @@ editorheight();
 function treeviewheight () {
 	// 56 inverse olan
 	var heig = $( window ).height();
-	$( '#treeview' ).height( heig - 82 );
+	$( '#treeview' ).height( heig - 83 );
 }
 
 treeviewheight();
