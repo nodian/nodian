@@ -31,11 +31,19 @@ function leanmiddleheight () {
 
 leanmiddleheight();
 
+function settingsheight () {
+	var heig = $( window ).height();
+	$( '#settings' ).height( heig - 22 );
+}
+
+settingsheight();
+
 $( window ).resize(function() {
 	editorheight();
 	treeviewheight();
 	packageheight();
 	leanmiddleheight();
+	settingsheight();
 });
 
 function loadNPM(){

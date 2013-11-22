@@ -560,3 +560,92 @@ function loadNodianConfig ( conf ) {
 	editor.moveCursorTo(config.cursor.row, config.cursor.column);
 	editor.getSession().setTabSize(config.tabsize);
 }
+
+
+//////////////////////////////////
+/// Package.json section start ///
+//////////////////////////////////
+
+
+function addpackageview (packagename, packagedesc, packagever) {
+	// var onepackage = 
+	// "
+ //          <div class=\"alert alert-info\">
+ //            <button id=\"pack\" onclick=\"removepackage(this);\" type=\"button\" class=\"close fui-cross\" data-dismiss=\"alert\"></button>
+ //            <h3 id=\"packagename\">"+packagename+"</h3>
+ //            <div class=\"control-group huge pull-right\">
+ //              <input id=\"packagever\" type=\"text\" value=\""+packagever+"\" placeholder=\"Version\" class=\"span3\">
+ //            </div>
+ //            <p id=\"packagedesc\">"+packagedesc+"</p>
+ //            <a href=\"#fakelink\" class=\"btn btn-info btn-wide\">Save</a>
+ //            <!-- <a href=\"#fakelink\" class=\"btn btn-wide\">It’s ok</a> -->
+ //          </div>
+ //    ";
+
+ 	var onepackage = 
+	"<div class=\"alert alert-info\"><button id=\"pack\" onclick=\"removepackage(this);\" type=\"button\" class=\"close fui-cross\" data-dismiss=\"alert\"></button><h3 id=\"packagename\">"+packagename+"</h3><div class=\"control-group huge pull-right\"><input id=\"packagever\" type=\"text\" value=\""+packagever+"\" placeholder=\"Version\" class=\"span3\"></div><p id=\"packagedesc\">"+packagedesc+"</p><a href=\"#fakelink\" class=\"btn btn-info btn-wide\">Save</a></div>";
+
+    document.getElementById('projectpackages').innerHTML += onepackage;
+    $('#projectpackages').append(onepackage);
+}
+
+function fillpackageview () {
+	// body...
+	var packagejson = Ti.Filesystem.getFile(curprojectdir, "package.json");
+
+	var contents = "";
+
+	if (packagejson.exists())
+	{
+	   var Stream = Ti.Filesystem.getFileStream(packagejson);    
+	   Stream.open(Ti.Filesystem.MODE_READ);     
+	   contents = Stream.read();
+	   Stream.close();
+	}
+
+	var pjson = Ti.JSON.parse(contents);
+
+	for(var key in pjson.dependencies) {
+	    var value = pjson.dependencies[key];
+	    addpackageview(key, "", value);
+	}
+}
+
+function removepackage (elem) {
+	// body...
+	var packagejson = Ti.Filesystem.getFile(curprojectdir, "package.json");
+
+	try{
+		var contents = "";
+
+		var packname = $(elem.id+'').closest('h3').text();
+
+		if (packagejson.exists())
+		{
+		   var Stream = Ti.Filesystem.getFileStream(packagejson);    
+		   Stream.open(Ti.Filesystem.MODE_READ);     
+		   contents = Stream.read();
+		   Stream.close();
+		}
+
+		var pjson = Ti.JSON.parse(contents);
+		delete pjson.dependencies[packname];
+
+		if (packagejson.exists())
+		{
+		   var Stream = Ti.Filesystem.getFileStream(packagejson);    
+		   Stream.open(Ti.Filesystem.MODE_WRITE);     
+		   var pjsonforwrite = JSON.stringify(pjson, null, 4);
+		   Stream.write(pjsonforwrite);
+		   Stream.close();
+		}
+	}catch(e)
+	{
+		alert('Error manipulating the package.json : '+e.message);
+	}
+
+}
+
+//////////////////////////////////
+/// Package.json section  end  ///
+//////////////////////////////////
