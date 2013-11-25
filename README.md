@@ -34,12 +34,12 @@ A local editor for nodejs, css, html5, & javascript development.
 Built using:
 ============
 
-- [Node.js](https://github.com/joyent/node)
-- [ace editor](https://github.com/ajaxorg/ace)
-- [Twitter Bootstrap](twitter.github.com/bootstrap/)
-- [Backbone](backbone.orgbackbonejs.org)
+- [Node.js](http://nodejs.org/)
+- [ace editor](http://ace.c9.io/)
+- [Flat UI](http://designmodo.github.io/Flat-UI/)
+- [Backbone](http://backbonejs.org)
 - [JQuery](http://jquery.com)
-- [socket.io](https://github.com/LearnBoost/socket.io)
+- [socket.io](http://socket.io/)
 
 Dependencies:
 =============
