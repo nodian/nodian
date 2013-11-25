@@ -1,6 +1,6 @@
 $(function($) {
   // nodian model
-  Noide = Backbone.Model.extend({
+  Nodian = Backbone.Model.extend({
     initialize: function(data) {
       // initial directory fso instance
       var initDir = new FileSystemItem({
@@ -39,7 +39,7 @@ $(function($) {
   });
 
   // nodian view
-  NoideView = Backbone.View.extend({
+  NodianView = Backbone.View.extend({
     el: document.body,
     events: {
       'click #header .view': 'clickHeaderView'
@@ -68,9 +68,11 @@ $(function($) {
       this._$iframes = $('iframe', this._$frames);
       this._$iframeurls = $('input.address-bar', this._$frames);
       this._$files = $('#files');
+      /*
       window.onbeforeunload = function() {
-        return 'Noide';
+        return 'Nodian';
       }
+      */
       // frames
       $('#frames form').on('submit', function(e) {
         e.preventDefault();
@@ -228,7 +230,11 @@ $(function($) {
         'runadvanced': function(item) {
           var self = this;
           this.runDialogView.show(function(e, value) {
-            var command = 'node ';
+            if(item.get('name').indexOf('.js') !== -1){
+              var command = 'node ';
+            }else if(item.get('name').indexOf('.coffee') !== -1){
+              var command = 'coffee ';
+            }
             if (value.debug) {
               command += (value.brk ? '--debug-brk=' : '--debug=') + value.port + ' ';
             }
@@ -275,9 +281,9 @@ $(function($) {
 
   
   // nodian instance
-  nodian = new Noide(initData);
+  nodian = new Nodian(initData);
   // nodian view instance
-  nodianView = new NoideView({
+  nodianView = new NodianView({
     model: nodian
   });
 });

@@ -7,16 +7,18 @@ A useful, lightweight tool for Node.js, HTML5, CSS & JS development.
 Thanks for taking a look. Any comments, feedback or support use [Twitter](https://twitter.com/node_ide).
 
 
-![ide](https://raw.github.com/davidjamesstone/nodian/gh-pages/images/Untitled.jpg "IDE")
+![ide](https://raw.github.com/nodian/nodian/master/public/img/logofw.png "IDE")
 
-`nodian`’s current features:
+`nodian` features:
 
+- Coffeescript run
+- Coffeescript compiling
 - File explorer tree view
 - File operations (create/delete/rename files and directories)
 - Syntax highlighted code tabbed code editing for multiple programming languages
 - HTML/CSS/JS beautify
 - Code folding
-- Find/Find+Replace 
+- Find/Find+Replace
 - JSLINT validation warning
 - NPM integration (display currently installed packages, add/remove packages, install package dependencies)
 - HTTP basic authentication (for running nodian on a public server)
@@ -39,22 +41,6 @@ Built using:
 - [JQuery](http://jquery.com)
 - [socket.io](https://github.com/LearnBoost/socket.io)
 
-
-*** WARNING ***:
-================
-If you'd like to try out this IDE that's great and thanks BUT USE CAUTION.
-nodian is in early stages.
-
-It started out as a learning exercise for Backbone and Node.js and the IDE grew out of that.
-
-Ensure any code is backed up regularly.
-I would not like it to be responsible for any work lost. 
-
-Having said that the IDE seems fairly stable and robust and is a 
-workable lightweight tool for Node.js, HTML5/CSS/JS development.
-
-![debugger](https://raw.github.com/davidjamesstone/nodian/gh-pages/images/Untitled2.jpg "debugger")
-
 Dependencies:
 =============
 - Node.js
@@ -68,7 +54,7 @@ node-inspector works almost exactly like the web inspector in Safari and Chrome.
 
 OS Platforms/Browsers
 =========================
-- Tested on SmartOS, Linux Ubuntu and Windows 7
+- Tested on MacOS, SmartOS, Linux Ubuntu and Windows 7
 - Tested using Chrome, Firefox, Safari & IE9
 
 Note: integrated debugging uses web inspector plugin available on webkit based browsers Chrome, Safari, Opera.
@@ -177,14 +163,12 @@ This file should hold the IDE settings:
 Editor
 ======
 
-The code editor used in nodian is the ajaxorg/ace editor.
-
-Here's a useful [link](https://github.com/ajaxorg/ace/wiki/Default-Keyboard-Shortcuts) for default keyboard shortcuts 
+Here's a useful ACE editor shortcuts [link](https://github.com/ajaxorg/ace/wiki/Default-Keyboard-Shortcuts) for default keyboard shortcuts 
 
 License
 =======
 
-Nide is released under a **MIT License**:
+Nodian is released under a **MIT License**:
 
     Copyright (C) 2013 by David Stone
     
