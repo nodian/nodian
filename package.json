@@ -1,0 +1,35 @@
+{
+  "main": "http://127.0.0.1:4389",
+  "name": "nodian",
+  "version": "0.0.1",
+  "node-main": "app.js",
+  "description": "Nodian",
+  "author": {
+    "name": "Mahmut Bulut"
+  },
+  "dependencies": {
+    "express": "*",
+    "ejs": "*",
+    "ejs-locals": "*",
+    "socket.io": "*",
+    "rimraf": "*"
+  },
+  "window": {
+    "title": "Nodian IDE",
+    "icon": "logo.png",
+    "resizable": true,
+    "toolbar": false,
+    "frame": true,
+    "width": 800,
+    "height": 500,
+    "position": "mouse",
+    "min_width": 400,
+    "min_height": 200,
+    "max_width": 3200,
+    "max_height": 3200
+  },
+  "webkit": {
+    "plugin": true,
+    "java": true
+  }
+}

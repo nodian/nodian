@@ -1,0 +1,56 @@
+<div class="navbar /*btn-inverse*/ navbar-static-top">
+  <div class="navbar-inner">
+    <div class="container-fluid">
+      <a href="/" class="brand"><img src="img/logowrit.png"></a>
+      
+      <ul class="nav">
+        <li>
+          <a class="view" href="#files">
+            <span class="fui-folder"></span><small>Project</small>
+          </a>
+        </li>
+        <li>
+          <a class="view" href="#frames">
+            <span class="fui-windows"></span><small>Frames</small>
+          </a>
+        </li>
+        <li>
+          <a class="view" href="#" onclick="javascript:location.reload(true);">
+            <span class="fui-loop"></span><small>Reload</small>
+          </a>
+        </li>
+      </ul>
+
+      <div class="btn-group pull-right links">
+        <i class="dropdown-arrow dropdown-arrow-inverse"></i>
+        <button style="margin-top: 10px;" data-toggle="dropdown" class="btn btn-inverse dropdown-toggle "><span class="fui-book"></span>Documentation <span class="caret"></span>
+        </button>
+        <ul class="dropdown-menu dropdown-inverse">
+          <!--
+          <li>
+            <a class="view" href="#files">files</a>
+          </li>
+          <li>
+            <a class="view" href="#frames">frames</a>
+          </li>
+          -->
+          <% if (initData.config.links) { %>
+          <!-- <li class="divider"></li> -->
+          <% 
+          var links = initData.config.links;
+          for (var l in links) { 
+            var href = links[l]; 
+            if (l.indexOf('-') == 0) { 
+              l = l.substring(1); %>
+              <li class="divider"></li>
+            <% } %>
+            <li>
+              <a href="<%= href %>" target="_blank"><%= l %></a>
+            </li>
+          <% } %>
+          <% } %>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
