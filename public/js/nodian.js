@@ -212,7 +212,8 @@ $(function($) {
               paths: item.paths(),
               socket: this.socket
             }));
-          }else{
+          }
+          else{
             alert('This will not compile.');
           }
         },
@@ -222,6 +223,17 @@ $(function($) {
             console.log("Autocompile : " + item.paths()[0]);
             this.procs.add(new ChildProcess({
               cmd: 'coffee -c ' + item.get('name'),
+              paths: item.paths(),
+              socket: this.socket
+            }));
+          }
+        },
+        'typescriptcompile': function(item){
+          if (item.get('name').indexOf('.js') === -1){
+            console.log('OLDU');
+            console.log("Autocompile : " + item.paths()[0]);
+            this.procs.add(new ChildProcess({
+              cmd: 'tsc ' + item.get('name'),
               paths: item.paths(),
               socket: this.socket
             }));

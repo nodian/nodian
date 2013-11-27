@@ -27,6 +27,16 @@
   display: list-item;
 }
 
+#explorer .explorer-file-menu li.run, #explorer .explorer-file-menu li.install, #explorer .explorer-file-menu li.typescript
+{
+  display: none;
+}
+
+#explorer .explorer-file-menu.runable li.run, #explorer .explorer-file-menu.installable li.install, #explorer .explorer-file-menu.typescript li.typescript
+{
+  display: list-item;
+}
+
 #explorer li.file span.edited
 {
 	color: red;

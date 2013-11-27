@@ -23,9 +23,11 @@ $(function($) {
 				var fsi = self.model.get(cid);
 
 				if(fsi.get('ext') === '.js'){
-					$menu.css({top: y + 'px', left: x + 'px'}).addClass('runable')
+					$menu.css({top: y + 'px', left: x + 'px'})
+					.addClass('runable')
 					.removeClass('installable')
 					.removeClass('coffee')
+					.removeClass('typescript')
 					.show()
 					.data('cid', $item.data('cid'))
 					.siblings('.dropdown').hide();
@@ -34,6 +36,18 @@ $(function($) {
 					.addClass('runable')
 					.addClass('coffee')
 					.removeClass('installable')
+					.removeClass('typescript')
+					.show()
+					.data('cid', $item.data('cid'))
+					.siblings('.dropdown').hide();
+				}
+				//typescript
+				else if (fsi.get('ext') === '.ts') {
+					$menu.css({top: y + 'px', left: x + 'px'})
+					.addClass('typescript')
+					.removeClass('installable')
+					.removeClass('coffee')
+					.removeClass('runable')
 					.show()
 					.data('cid', $item.data('cid'))
 					.siblings('.dropdown').hide();
@@ -42,6 +56,7 @@ $(function($) {
 					.css({top: y + 'px', left: x + 'px'})
 					.removeClass('runable')
 					.removeClass('coffee')
+					.removeClass('typescript')
 					[fsi.get('name') === 'package.json' ? 'addClass' : 'removeClass']('installable')
 					.show()
 					.data('cid', $item.data('cid'))
