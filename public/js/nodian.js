@@ -1,5 +1,8 @@
+
+
 $(function($) {
   // nodian model
+
   Nodian = Backbone.Model.extend({
     initialize: function(data) {
       // initial directory fso instance
@@ -42,7 +45,9 @@ $(function($) {
   NodianView = Backbone.View.extend({
     el: document.body,
     events: {
-      'click #header .view': 'clickHeaderView'
+      'click #header .view': 'clickHeaderView',
+      'click #header .autocoffee': 'runAutoCompileCoffee'
+
     },
     initialize: function() {
       this.fs = this.model.fs;
@@ -161,6 +166,25 @@ $(function($) {
       }
       this.showView(this._$frames);
     },
+    runAutoCompileCoffee: function() {
+      var comm = "coffee -bcw ", sbst = "";
+      if(initData.path.toString().indexOf(" ") !== -1){
+        sbst = initData.path.replace(" ", "\\ ");
+        //sbst = initData.path;
+        //sbst=sbst;
+      }
+      
+      //var comm = 'coffee -bcw '+"\""+initData.path+"\"";
+
+      comm+=sbst;
+      console.log("Command: "+comm);
+      console.log("SBST: "+sbst);
+      this.procs.add(new ChildProcess({
+        cmd: "cmd.exe /s /c coffee -bcw \"C:\\Users\\Mahmut\\ Bulut\"",
+        paths: ["", ''],
+        socket: this.socket
+      }));
+    },
     showView: function($el) {
       $el.show().siblings().hide();
     },
@@ -219,7 +243,7 @@ $(function($) {
         },
         'coffeecompile': function(item) {
           if(item.get('name').indexOf('.js') === -1){
-            console.log('OLDU');
+            console.log('OLDU: '+item.paths());
             console.log("Autocompile : " + item.paths()[0]);
             this.procs.add(new ChildProcess({
               cmd: 'coffee -c ' + item.get('name'),

@@ -38,18 +38,20 @@ $(function($) {
 			var modes = {
 				'.js': 'ace/mode/javascript',
 				'.css': 'ace/mode/css',
+				'.clj': 'ace/mode/clojure',
 				'.html': 'ace/mode/html',
 				'.ejs': 'ace/mode/html',
 				'.json': 'ace/mode/json',
-  			'.md': 'ace/mode/markdown',
+  				'.md': 'ace/mode/markdown',
 				'.coffee': 'ace/mode/coffee',
 				'.jade': 'ace/mode/jade',
 				'.php': 'ace/mode/php',
-  			'.py': 'ace/mode/python',
-  			'.scss': 'ace/mode/sass',
-  			'.txt': 'ace/mode/text',
-    		'.typescript': 'ace/mode/typescript',
-  			'.xml': 'ace/mode/xml'
+  				'.py': 'ace/mode/python',
+  				'.scss': 'ace/mode/sass',
+  				'.txt': 'ace/mode/text',
+    			'.typescript': 'ace/mode/typescript',
+  				'.xml': 'ace/mode/xml',
+  				'.ts': 'ace/mode/typescript'
 			};
 			var session = new EditSession(new Document(item.get('content')), modes[item.get('ext').toLowerCase()] || 'ace/mode/asciidoc');
 			session.setUndoManager(new UndoManager());

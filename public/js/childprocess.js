@@ -43,7 +43,7 @@ $(function($) {
 				});			
 			
 			if (!data.alive) {
-				socket.emit('spawn', { command: data.cmd, paths: data.paths, cid: this.cid }, function(data) {
+				socket.emit('spawn', { command: data.cmd, paths: data.paths, cid: this.cid, windowsVerbatimArguments: true }, function(data) {
 					console.log('cb '+data);
 					self.set({ pid: data, alive: true });
 				});
@@ -53,7 +53,6 @@ $(function($) {
 					self.set({ pid: data, alive: true });
 				});
 			}
-			
 		},
 		kill: function() {
 			var self = this;
