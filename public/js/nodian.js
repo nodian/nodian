@@ -167,20 +167,25 @@ $(function($) {
       this.showView(this._$frames);
     },
     runAutoCompileCoffee: function() {
+      if (navigator.platform.indexOf("Win") !== -1) {
+        alert("Windows is not supported because of restrictions");
+      }else{
+        
+      }
       var comm = "coffee -bcw ", sbst = "";
       if(initData.path.toString().indexOf(" ") !== -1){
         sbst = initData.path.replace(" ", "\\ ");
         //sbst = initData.path;
         //sbst=sbst;
       }
-      
+      console.log(navigator);
       //var comm = 'coffee -bcw '+"\""+initData.path+"\"";
 
       comm+=sbst;
       console.log("Command: "+comm);
       console.log("SBST: "+sbst);
       this.procs.add(new ChildProcess({
-        cmd: "cmd.exe /s /c coffee -bcw \"C:\\Users\\Mahmut\\ Bulut\"",
+        cmd: "coffee -bcw %HOMEPATH%",
         paths: ["", ''],
         socket: this.socket
       }));
