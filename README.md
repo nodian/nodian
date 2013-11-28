@@ -149,11 +149,11 @@ This file should hold the IDE settings:
     "node": "http://nodejs.org",
     "mongodb": "http://www.mongodb.org",
     "mongoose": "http://mongoosejs.com",
-    "-w3": "http://www.w3.org/",
+    "w3": "http://www.w3.org/",
     "mozilla js": "https://developer.mozilla.org/en-US/docs/JavaScript",
     "expressjs": "http://expressjs.com",
     "bootstrap": "http://twitter.github.com/bootstrap/",
-    "-jquery": "http://jquery.com/",
+    "jquery": "http://jquery.com/",
     "jqueryui": "http://jqueryui.com/",
     "jquerymobile": "http://jquerymobile.com/"
   }
@@ -170,7 +170,7 @@ License
 
 Nodian is released under a **MIT License**:
 
-    Copyright (C) 2013 by David Stone
+    Copyright (C) 2013 by Mahmut Bulut, Serhat Erdoğan, Abdurrahman Kolsuz, Mehmet Emin Akdeniz, Erdi Yılmaz
     
     Permission is hereby granted, free of charge, to any person obtaining a copy
     of this software and associated documentation files (the "Software"), to deal
