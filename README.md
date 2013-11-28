@@ -54,46 +54,10 @@ node-inspector works almost exactly like the web inspector in Safari and Chrome.
 
 OS Platforms/Browsers
 =========================
-- Tested on MacOS, SmartOS, Linux Ubuntu and Windows 7
-- Tested using Chrome, Firefox, Safari & IE9
+- Tested on MacOS, SmartOS, Linux Ubuntu and Windows 7/8/8.1
+- Tested using Chrome, Firefox, Opera, Safari & IE9
 
 Note: integrated debugging uses web inspector plugin available on webkit based browsers Chrome, Safari, Opera.
-
-Instructions
-============
-
-From npm it's
-
-npm install nodian
-
-OR
-
-Clone the repository into a folder of your choice ([nodian-install-dir]).
-
-Once complete, entering
-
-    node app
-
-from the [nodian-install-dir] should be enough to get the web app up and running.
-
-
-nodian runs on port 2424. Use http://localhost:2424?path=your_directory_path to open the IDE in the specified path.
-
-E.g.
-
-http://localhost:2424?path=/root/projects/node
-
-OR
-
-http://localhost:2424?path=c:\projects\node
-
-
-
-http://localhost:2424 should bring up your Projects Landing Page.
-
-By default this is set to /[nodian-install-dir]/nodian/projects.
-
-To change this and other settings you use a nodian.json configuration file.
 
 
 nodian configuration file (optional)
