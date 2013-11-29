@@ -7,9 +7,9 @@ An awesome installation for Node.js, HTML5, TypeScript, CoffeeScript, CSS & JS d
 <a href="https://twitter.com/NodianProject" class="twitter-follow-button" data-show-count="false" data-size="large">Follow the awesome @NodianProject</a>
 <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
 
+[![Stories in Ready](https://badge.waffle.io/nodian/nodian.png?label=ready)](http://waffle.io/nodian/nodian)
+
 ![ide](https://raw.github.com/nodian/nodian/master/public/img/logofw.png "IDE")
-
-
 
 `nodian` has:
 
