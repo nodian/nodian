@@ -1,3 +1,4 @@
+[![Stories in Ready](https://badge.waffle.io/nodian/nodian.png?label=ready)](https://waffle.io/nodian/nodian)  
 nodian
 ====
 
@@ -138,7 +139,7 @@ License
 
 Nodian is released under a **MIT License**:
 
-    Copyright (C) 2013 by Mahmut Bulut, Serhat Erdoğan, Abdurrahman Kolsuz, Mehmet Emin Akdeniz, Erdi Yılmaz
+    Copyright (C) 2013 by Mahmut Bulut, Serhat ErdoDan, Abdurrahman Kolsuz, Mehmet Emin Akdeniz, Erdi YD1lmaz
     
     Permission is hereby granted, free of charge, to any person obtaining a copy
     of this software and associated documentation files (the "Software"), to deal
