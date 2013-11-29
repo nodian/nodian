@@ -1,16 +1,17 @@
 nodian
 ====
 
-`nodian`is a web-based IDE for Node.js.
-A useful, lightweight tool for Node.js, HTML5, CSS & JS development.
+`nodian`is a cross-platform IDE for Node.JS.
+A useful, lightweight tool for Node.js, HTML5, TypeScript, CoffeeScript, CSS & JS development.
 
-Thanks for taking a look. Any comments, feedback or support use [Twitter](https://twitter.com/node_ide).
+For comments, feedback or support use [Twitter](https://twitter.com/nodianide).
 
 
 ![ide](https://raw.github.com/nodian/nodian/master/public/img/logofw.png "IDE")
 
-`nodian` features:
+`nodian` has:
 
+- Typescript compiling
 - Coffeescript run
 - Coffeescript compiling
 - File explorer tree view
@@ -23,13 +24,13 @@ Thanks for taking a look. Any comments, feedback or support use [Twitter](https:
 - NPM integration (display currently installed packages, add/remove packages, install package dependencies)
 - HTTP basic authentication (for running nodian on a public server)
 - Configurable documentation links
-- Run/Debugging/Previewing
+- Running/Debugging/Previewing
 
 
 Use cases:
 ============
 A lightweight editor for installation on terminal cloud VMs e.g. joyent smart machine.
-A local editor for nodejs, css, html5, & javascript development.
+A desktop app for nodejs, coffeescript, typescript and development.
 
 Built using:
 ============

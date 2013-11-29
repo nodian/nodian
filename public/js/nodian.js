@@ -125,6 +125,11 @@ $(function($) {
       explorerView.on('action', function(e, item, action) {
         self.action(action, item);
       });
+      // replace all proto
+      String.prototype.replaceAll = function(str1, str2, ignore) 
+      {
+        return this.replace(new RegExp(str1.replace(/([\/\,\!\\\^\$\{\}\[\]\(\)\.\*\+\?\|\<\>\-\&])/g,"\\$&"),(ignore?"gi":"g")),(typeof(str2)=="string")?str2.replace(/\$/g,"$$$$"):str2);
+      }
       // editor ui events
       editorView.on('tabcloseclick', function(e, item, content) {
         if (item.get('edited')) {
@@ -170,25 +175,24 @@ $(function($) {
       if (navigator.platform.indexOf("Win") !== -1) {
         alert("Windows is not supported because of restrictions");
       }else{
-        
-      }
-      var comm = "coffee -bcw ", sbst = "";
-      if(initData.path.toString().indexOf(" ") !== -1){
-        sbst = initData.path.replace(" ", "\\ ");
-        //sbst = initData.path;
-        //sbst=sbst;
-      }
-      console.log(navigator);
-      //var comm = 'coffee -bcw '+"\""+initData.path+"\"";
+        var sbst = "";
+        if(initData.path.toString().indexOf(" ") !== -1){
+          sbst = initData.path.replaceAll(" ", "\\ ").replaceAll("(", "\\(").replaceAll(")", "\\)");
+          //sbst = initData.path;
+          //sbst=sbst;
+        }
 
-      comm+=sbst;
-      console.log("Command: "+comm);
-      console.log("SBST: "+sbst);
-      this.procs.add(new ChildProcess({
-        cmd: "coffee -bcw %HOMEPATH%",
-        paths: ["", ''],
-        socket: this.socket
-      }));
+        var comm = "coffee -bcw " + sbst;
+
+        console.log("Command: "+comm);
+        console.log("SBST: "+sbst);
+
+        this.procs.add(new ChildProcess({
+          cmd: comm,
+          paths: [initData.path, ''],
+          socket: this.socket
+        }));
+      }
     },
     showView: function($el) {
       $el.show().siblings().hide();
