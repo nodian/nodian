@@ -1,13 +1,15 @@
 nodian
 ====
 
-`nodian`is a cross-platform IDE for Node.JS.
-A useful, lightweight tool for Node.js, HTML5, TypeScript, CoffeeScript, CSS & JS development.
+`nodian` is a cross-platform IDE for Node.JS.
+An awesome installation for Node.js, HTML5, TypeScript, CoffeeScript, CSS & JS development.
 
-For comments, feedback or support use [Twitter](https://twitter.com/nodianide).
-
+<a href="https://twitter.com/NodianProject" class="twitter-follow-button" data-show-count="false" data-size="large">Follow the awesome @NodianProject</a>
+<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
 
 ![ide](https://raw.github.com/nodian/nodian/master/public/img/logofw.png "IDE")
+
+
 
 `nodian` has:
 
@@ -25,6 +27,7 @@ For comments, feedback or support use [Twitter](https://twitter.com/nodianide).
 - HTTP basic authentication (for running nodian on a public server)
 - Configurable documentation links
 - Running/Debugging/Previewing
+
 
 
 Use cases:
@@ -154,3 +157,7 @@ Nodian is released under a **MIT License**:
     LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
     OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
     THE SOFTWARE.
+
+BTW Love us like this
+=======
+!["Love US!!"](http://i.imgur.com/ZiIoAUj.gif "Love US!!")
